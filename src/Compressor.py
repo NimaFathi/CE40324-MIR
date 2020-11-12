@@ -1,6 +1,6 @@
-
 from __future__ import division
 from struct import pack, unpack
+
 
 class Compressor:
     @staticmethod
@@ -26,10 +26,7 @@ class Compressor:
         return result
 
 
-
-
 def var_encode_number(number):
-
     bytes_list = []
     while True:
         bytes_list.insert(0, number % 128)
@@ -39,12 +36,13 @@ def var_encode_number(number):
     bytes_list[-1] += 128
     return pack('%dB' % len(bytes_list), *bytes_list)
 
-def var_encode(numbers):
 
+def var_encode(numbers):
     bytes_list = []
     for number in numbers:
         bytes_list.append(var_encode_number(number))
     return b"".join(bytes_list)
+
 
 def decode(bytestream):
     n = 0
