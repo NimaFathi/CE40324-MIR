@@ -68,6 +68,3 @@ def correct_query(q, dictionary):
             # print(word, ":\n\n", "Jaccard: ",  result_j, "\nLevenshtein: ", result_l)
 
     return modified_query
-
-
-print(jaccard_similarity("help", "halp"))
