@@ -1,6 +1,12 @@
 def jaccard_similarity(word1, word2):
-    intersection = len(list(set(word1).intersection(word2)))
-    union = (len(word1) + len(word2)) - intersection
+    # intersection = len(list(set(word1).intersection(word2)))
+    # union = (len(word1) + len(word2)) - intersection
+    # return float(intersection) / union
+
+    bigrams1 = [word1[i:i + 2] for i in range(len(word1) - 1)]
+    bigrams2 = [word2[i:i + 2] for i in range(len(word2) - 1)]
+    intersection = len(list(set(bigrams1).intersection(set(bigrams2))))
+    union = len(set(bigrams1)) + len(set(bigrams2)) - intersection
     return float(intersection) / union
 
 
@@ -62,3 +68,6 @@ def correct_query(q, dictionary):
             # print(word, ":\n\n", "Jaccard: ",  result_j, "\nLevenshtein: ", result_l)
 
     return modified_query
+
+
+print(jaccard_similarity("help", "halp"))
