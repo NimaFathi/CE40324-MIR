@@ -32,7 +32,7 @@ class BiGramIndex:
             if token not in self.index[term]:
                 self.index[term][token] = []
 # save and load part
-    
+
     def load(self):
         with open('index/' + self.name + '.pkl', 'rb') as f:
             self.index = pickle.load(f)
