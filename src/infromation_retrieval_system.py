@@ -14,7 +14,7 @@ class IRSystem:
 
     def __init__(self, ir_type):
         self.type = ir_type
-        self.pre_processor = PreProcess
+        self.pre_processor = None
         self.raw_body_documents = []
         self.body_documents = []
         self.raw_title_documents = []
