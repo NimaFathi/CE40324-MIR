@@ -1,4 +1,4 @@
-from .preprocess_base import PreProcess
+from .pre_process_base import PreProcess
 
 from nltk.corpus import stopwords
 from nltk import word_tokenize

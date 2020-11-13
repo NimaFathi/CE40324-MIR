@@ -1,13 +1,13 @@
 import pickle
 import os
-
+from collections import defaultdict
 
 # for positional indexing a single word has a list of documents
 
 
 class PositionalIndex:
     def __init__(self, name, docs, ids):
-        self.index = dict()
+        self.index = defaultdict(dict)
         self.name = name
 
         # index is the dictionary of differnet terms
@@ -37,7 +37,7 @@ class PositionalIndex:
     # for part 2.2 the constructed posting list will be shown as bellow
 
     def show_posting_list(self, term):
-        print(self.name + " positional index")
+        print(self.name + ":")
         for doc_id, positions in self.index[term].items():
             print(str(doc_id) + " : --> the positions are  " + str(positions))
 

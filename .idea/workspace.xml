@@ -19,8 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="69256987-6b02-4ae5-88d7-d7b1b0013e44" name="Default Changelist" comment="pandas import fixed + q -&gt; word">
+    <list default="true" id="69256987-6b02-4ae5-88d7-d7b1b0013e44" name="Default Changelist" comment="update .gitignore file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/QueryCorrection.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/QueryCorrection.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -108,7 +109,7 @@
       <workItem from="1605204701018" duration="5559000" />
       <workItem from="1605272858633" duration="150000" />
       <workItem from="1605273026685" duration="768000" />
-      <workItem from="1605278382518" duration="4501000" />
+      <workItem from="1605278382518" duration="639000" />
     </task>
     <task id="LOCAL-00001" summary="add pre_proccess files">
       <created>1605210720940</created>
@@ -131,14 +132,7 @@
       <option name="project" value="LOCAL" />
       <updated>1605273788649</updated>
     </task>
-    <task id="LOCAL-00004" summary="pandas import fixed + q -&gt; word">
-      <created>1605279077670</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1605279077670</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,8 +153,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add pre_proccess files" />
     <MESSAGE value="update .gitignore file" />
-    <MESSAGE value="pandas import fixed + q -&gt; word" />
-    <option name="LAST_COMMIT_MESSAGE" value="pandas import fixed + q -&gt; word" />
+    <option name="LAST_COMMIT_MESSAGE" value="update .gitignore file" />
   </component>
   <component name="WindowStateProjectService">
     <state width="1218" height="170" key="GridCell.Tab.0.bottom" timestamp="1605278981450">
@@ -188,11 +181,9 @@
     </state>
     <state x="284" y="35" width="900" height="722" key="SettingsEditor/0.23.1280.734@0.23.1280.734" timestamp="1605278523051" />
     <state x="426" y="188" width="1067" height="737" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1605188572614" />
-    <state x="370" y="203" width="800" height="543" key="Vcs.Push.Dialog.v2" timestamp="1605279671301">
-      <screen x="0" y="23" width="1280" height="732" />
+    <state x="555" y="285" width="800" height="543" key="Vcs.Push.Dialog.v2" timestamp="1605210726256">
+      <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="370" y="203" key="Vcs.Push.Dialog.v2/0.23.1280.732@0.23.1280.732" timestamp="1605279671301" />
-    <state x="370" y="203" key="Vcs.Push.Dialog.v2/0.23.1280.734@0.23.1280.734" timestamp="1605279413827" />
     <state x="555" y="285" width="800" height="543" key="Vcs.Push.Dialog.v2/0.27.1920.1053@0.27.1920.1053" timestamp="1605210726256" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
