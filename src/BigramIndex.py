@@ -18,7 +18,6 @@ class BiGramIndex:
     def convert_to_bytestream(self, file):
         pickle.dump(self.index, file, pickle.HIGHEST_PROTOCOL)
 
-
     def add_token(self, doc_id, token):
         bounded_token = '$' + token + '$'
         for i in range(len(bounded_token) - 1):
@@ -31,8 +30,9 @@ class BiGramIndex:
                 self.index[term] = dict()
             if token not in self.index[term]:
                 self.index[term][token] = []
-# save and load part
-    
+
+    # save and load part
+
     def load(self):
         with open('index/' + self.name + '.pkl', 'rb') as f:
             self.index = pickle.load(f)
@@ -40,7 +40,8 @@ class BiGramIndex:
     def save(self):
         with open('index/' + self.name + '.pkl', 'wb') as f:
             self.convert_to_bytestream(f)
-#
+
+    #
     def delete_doc(self, doc_id):
         for term in self.index.keys():
             for token in self.index[term].keys():
@@ -48,8 +49,3 @@ class BiGramIndex:
 
     def show_bigram(self, bigram):
         print(self.index[bigram].keys())
-
-
-
-
-

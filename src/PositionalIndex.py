@@ -1,7 +1,6 @@
-
-
 import pickle
 import os
+
 
 # for positional indexing a single word has a list of documents
 
@@ -11,7 +10,7 @@ class PositionalIndex:
         self.index = dict()
         self.name = name
 
-        #index is the dictionary of differnet terms
+        # index is the dictionary of differnet terms
 
         self.construct_doc_list(docs, ids)
 
@@ -19,7 +18,7 @@ class PositionalIndex:
         for doc_id, doc_info in zip(ids, docs):
             self.add_doc(doc_id, doc_info)
 
-# operations for making the posting lists dynamic
+    # operations for making the posting lists dynamic
 
     def delete_doc(self, doc_id):
         for term in self.index.keys():
@@ -35,8 +34,7 @@ class PositionalIndex:
             if term not in self.index:
                 self.index[term] = dict()
 
-
-# for part 2.2 the constructed posting list will be shown as bellow
+    # for part 2.2 the constructed posting list will be shown as bellow
 
     def show_posting_list(self, term):
         print(self.name + " positional index")
@@ -46,4 +44,3 @@ class PositionalIndex:
     def show_position(self, term, doc_id):
         print(self.name + " positional index")
         print(self.index[term][doc_id])
-
