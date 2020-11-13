@@ -1,6 +1,11 @@
 import pandas
 import xml.etree.ElementTree as xee
 
+from .BigramIndex import BiGramIndex
+from .PositionalIndex import PositionalIndex
+from .QueryCorrection import *
+from .infromation_retrieval_system import IRSystem
+
 
 def load_en():
     document = pandas.read_csv('ted_talks.csv')
@@ -13,9 +18,9 @@ def load_pr():
     # TODO: is this the suitable xml format?
     collection = [page.find(f'{url}revision/{url}text').text for page in root.findall(url + 'page')]
     titles = [page.find(f'{url}title').text for page in root.findall(url + 'page')]
-    ids = [int(page.find(f'{url}id').text) for page in root.findall(url + 'page')]
+    doc_ids = [int(page.find(f'{url}id').text) for page in root.findall(url + 'page')]
 
-    return collection, titles, ids
+    return collection, titles, doc_ids
 
 
 # print("pee pee")
@@ -30,6 +35,8 @@ while True:
     else:
         print("please enter a valid option (1 or 2)")
         op1 = int(input("1. English\t2. Persian\n"))
+
+irs = IRSystem(lang)
 
 k_w = input("Please enter k & w:\n").split()
 k, w = int(k_w[0]), int(k_w[1])
