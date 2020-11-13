@@ -60,7 +60,7 @@ def correct_query(q, dictionary):
     # threshold = 0.5
     for word in q:
         if word in dictionary:
-            modified_query[len(modified_query):] = [q]
+            modified_query[len(modified_query):] = [word]
         else:
             result_l = similar_words_l(dictionary, word)
             modified_query.append(result_l)
