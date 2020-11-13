@@ -20,9 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69256987-6b02-4ae5-88d7-d7b1b0013e44" name="Default Changelist" comment="update .gitignore file">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/QueryCorrection.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/QueryCorrection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/infromation_retrieval_system.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/infromation_retrieval_system.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,6 +108,7 @@
       <workItem from="1605272858633" duration="150000" />
       <workItem from="1605273026685" duration="768000" />
       <workItem from="1605278382518" duration="639000" />
+      <workItem from="1605280999861" duration="2263000" />
     </task>
     <task id="LOCAL-00001" summary="add pre_proccess files">
       <created>1605210720940</created>
