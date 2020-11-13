@@ -34,7 +34,7 @@ class PreProcessPersian(PreProcess):
             for word, count in words_dict.items() if count > threshold
         }
 
-        self.plot_stop_words(stop_words_dict)
+        self.stop_words_dict = stop_words_dict
         self.stop_words = list(stop_words_dict.keys())
 
         return stop_words_dict

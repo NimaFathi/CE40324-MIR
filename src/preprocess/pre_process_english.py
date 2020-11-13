@@ -35,8 +35,7 @@ class PreProcessEnglish(PreProcess):
             word: count
             for word, count in words_dict.items() if word in stopwords.words("english")[1:100] and count > threshold
         }
-
-        self.plot_stop_words(stop_words_dict)
+        self.stop_words_dict = stop_words_dict
         self.stop_words = list(stop_words_dict.keys())
 
         return stop_words_dict
