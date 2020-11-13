@@ -1,4 +1,5 @@
 import pickle
+from collections import defaultdict
 
 
 # for the bigram implementation the two pairs including the required term
@@ -6,7 +7,7 @@ import pickle
 class BiGramIndex:
     def __init__(self, name, docs, ids):
         self.name = name
-        self.index = {}
+        self.index = defaultdict(dict)
 
         self.construct_doc_list(docs, ids)
 
@@ -23,6 +24,8 @@ class BiGramIndex:
         for i in range(len(bounded_token) - 1):
             term = bounded_token[i: i + 2]
 
+            if token not in self.index[term].keys():
+                self.index[term][token] = []
             if doc_id not in self.index[term][token]:
                 self.index[term][token].append(doc_id)
 
@@ -48,4 +51,4 @@ class BiGramIndex:
                 self.index[term][token].remove(doc_id)
 
     def show_bigram(self, bigram):
-        print(self.index[bigram].keys())
+        print(list(self.index[bigram].keys()))

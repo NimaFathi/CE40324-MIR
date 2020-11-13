@@ -88,7 +88,9 @@ class IRSystem:
 
 if __name__ == '__main__':
     ir = IRSystem('english')
-    print(ir.positional_index_body.show_posting_list())
+    # ir.positional_index_body.show_posting_list('sir')
+    # ir.positional_index_title.show_posting_list('you')
+    ir.bigram_index_body.show_bigram('pr')
     # print(ir.positional_index_title.index)
     # print(ir.bigram_index_body.index)
     # print(ir.bigram_index_title.index)
