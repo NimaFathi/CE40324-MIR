@@ -19,7 +19,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="69256987-6b02-4ae5-88d7-d7b1b0013e44" name="Default Changelist" comment="update .gitignore file" />
+    <list default="true" id="69256987-6b02-4ae5-88d7-d7b1b0013e44" name="Default Changelist" comment="update .gitignore file">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/infromation_retrieval_system.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/infromation_retrieval_system.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preprocess/pre_process_english.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocess/pre_process_english.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preprocess/pre_process_persian.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocess/pre_process_persian.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -62,6 +68,35 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="infromation_retrieval_system" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="CE40324-MIR" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/infromation_retrieval_system.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.infromation_retrieval_system" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -75,7 +110,7 @@
       <workItem from="1605188332263" duration="13909000" />
       <workItem from="1605204701018" duration="5559000" />
       <workItem from="1605272858633" duration="150000" />
-      <workItem from="1605273026685" duration="768000" />
+      <workItem from="1605273026685" duration="6519000" />
     </task>
     <task id="LOCAL-00001" summary="add pre_proccess files">
       <created>1605210720940</created>
@@ -98,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605273788649</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="update .gitignore file">
+      <created>1605273882247</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1605273882247</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,32 +164,33 @@
     <option name="LAST_COMMIT_MESSAGE" value="update .gitignore file" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1872" height="292" key="GridCell.Tab.0.bottom" timestamp="1605210936713">
+    <state width="1872" height="292" key="GridCell.Tab.0.bottom" timestamp="1605279496668">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1872" height="292" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1605210936713" />
-    <state width="1872" height="292" key="GridCell.Tab.0.center" timestamp="1605210936712">
+    <state width="1872" height="292" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1605279496668" />
+    <state width="1872" height="292" key="GridCell.Tab.0.center" timestamp="1605279496668">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1872" height="292" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1605210936712" />
-    <state width="1872" height="292" key="GridCell.Tab.0.left" timestamp="1605210936711">
+    <state width="1872" height="292" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1605279496668" />
+    <state width="1872" height="292" key="GridCell.Tab.0.left" timestamp="1605279496667">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1872" height="292" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1605210936711" />
-    <state width="1872" height="292" key="GridCell.Tab.0.right" timestamp="1605210936713">
+    <state width="1872" height="292" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1605279496667" />
+    <state width="1872" height="292" key="GridCell.Tab.0.right" timestamp="1605279496668">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1872" height="292" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1605210936713" />
+    <state width="1872" height="292" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1605279496668" />
     <state x="426" y="188" width="1067" height="737" key="SettingsEditor" timestamp="1605188572614">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="426" y="188" width="1067" height="737" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1605188572614" />
-    <state x="555" y="285" width="800" height="543" key="Vcs.Push.Dialog.v2" timestamp="1605210726256">
+    <state x="555" y="285" width="800" height="543" key="Vcs.Push.Dialog.v2" timestamp="1605273885250">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="555" y="285" width="800" height="543" key="Vcs.Push.Dialog.v2/0.27.1920.1053@0.27.1920.1053" timestamp="1605210726256" />
+    <state x="555" y="285" width="800" height="543" key="Vcs.Push.Dialog.v2/0.27.1920.1053@0.27.1920.1053" timestamp="1605273885250" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/CE40324_MIR$main.coverage" NAME="main Coverage Results" MODIFIED="1605210184665" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CE40324_MIR$infromation_retrieval_system.coverage" NAME="infromation_retrieval_system Coverage Results" MODIFIED="1605279496661" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>
