@@ -1,8 +1,8 @@
 from src.preprocess import PreProcess, PreProcessEnglish, PreProcessPersian
 import pandas as pd
 import xml.etree.ElementTree as ET
-from .PositionalIndex import PositionalIndex
-from .BigramIndex import BiGramIndex
+from src.PositionalIndex import PositionalIndex
+from src.BigramIndex import BiGramIndex
 
 
 class IRSystem:
@@ -87,4 +87,8 @@ class IRSystem:
 
 
 if __name__ == '__main__':
-    ir = IRSystem('persian')
+    ir = IRSystem('english')
+    print(ir.positional_index_body.show_posting_list())
+    # print(ir.positional_index_title.index)
+    # print(ir.bigram_index_body.index)
+    # print(ir.bigram_index_title.index)
