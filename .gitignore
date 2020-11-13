@@ -6,3 +6,5 @@ venv
 env
 data/
 data
+.idea
+.idea/
