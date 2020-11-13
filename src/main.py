@@ -1,10 +1,10 @@
-# import pandas as pd
+import pandas
 import xml.etree.ElementTree as xee
 
 
-# def load_en():
-#     document = pandas.read_csv('ted_talks.csv')
-#     return document
+def load_en():
+    document = pandas.read_csv('ted_talks.csv')
+    return document
 
 
 def load_pr():
