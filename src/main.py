@@ -44,4 +44,4 @@ if flag2:
     dictionary = input("now enter a dictionary containing correct form of your query's words "
                        "(and maybe other words):\n")
     print("corrected query is:\n")
-    print(correct_query(query, dictionary.split(), 0.1))
+    print(correct_query(query, dictionary.split()))

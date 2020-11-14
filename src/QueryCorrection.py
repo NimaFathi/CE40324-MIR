@@ -10,17 +10,17 @@ def jaccard_similarity(word1, word2):
     return float(intersection) / union
 
 
-def similar_words_j(dictionary, in_word, threshold):
+def similar_words_j(dictionary, in_word):
     jaccard_list = []
     for dest_word in dictionary:
         jaccard_list.append((dest_word, jaccard_similarity(in_word, dest_word)))
     jaccard_list = sorted(jaccard_list, key=lambda x: x[1], reverse=True)
     similars = []
-    for item in jaccard_list:
-        if item[1] >= threshold:
-            similars.append(item[0])
-        else:
-            break
+    size = len(jaccard_list)
+    if size > 10:
+        size = 10
+    for i in range(size):
+        similars.append(jaccard_list[i][0])
     return similars
 
 
@@ -45,7 +45,10 @@ def similar_words_l(dictionary, in_word):
     for dest_word in dictionary:
         distance_list.append((dest_word, levenshtein_distance(dest_word, in_word)))
     distance_list = sorted(distance_list, key=lambda x: x[1])
-    min_distance = distance_list[0][1]
+    size = len(distance_list)
+    if size > 10:
+        size = 10
+    min_distance = distance_list[size - 1][1]
     similars = []
     for dist in distance_list:
         if dist[1] <= min_distance:
@@ -55,13 +58,13 @@ def similar_words_l(dictionary, in_word):
     return similars
 
 
-def correct_query(q, dictionary, threshold):
+def correct_query(q, dictionary):
     modified_query = []
     for word in q.split():
         if word in dictionary:
             modified_query[len(modified_query):] = [word]
         else:
-            result_j = similar_words_j(dictionary, word, threshold)
+            result_j = similar_words_j(dictionary, word)
             if len(result_j) == 0:
                 result_l = similar_words_l(dictionary, word)
             else:
