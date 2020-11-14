@@ -20,12 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69256987-6b02-4ae5-88d7-d7b1b0013e44" name="Default Changelist" comment="fix minor bug in BigramIndex.py and PositionalIndex.py">
-      <change beforePath="$PROJECT_DIR$/src/infromation_retrieval_system.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/infromation_retrieval_system.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preprocess/pre_process_base.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocess/pre_process_base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preprocess/pre_process_english.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocess/pre_process_english.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preprocess/pre_process_persian.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocess/pre_process_persian.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ted_talks.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tf_idf.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/tf_idf.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ProximitySearch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,6 +134,8 @@
       <workItem from="1605273026685" duration="768000" />
       <workItem from="1605278382518" duration="639000" />
       <workItem from="1605280999861" duration="14343000" />
+      <workItem from="1605300791138" duration="517000" />
+      <workItem from="1605332072362" duration="3363000" />
     </task>
     <task id="LOCAL-00001" summary="add pre_proccess files">
       <created>1605210720940</created>
