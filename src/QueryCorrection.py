@@ -1,12 +1,20 @@
 def jaccard_similarity(word1, word2):
     # intersection = len(list(set(word1).intersection(word2)))
     # union = (len(word1) + len(word2)) - intersection
+    # if union == 0:
+    #     return 0.0
     # return float(intersection) / union
 
     bigrams1 = [word1[i:i + 2] for i in range(len(word1) - 1)]
     bigrams2 = [word2[i:i + 2] for i in range(len(word2) - 1)]
+    if len(bigrams1) == 0:
+        bigrams1.append(word1)
+    if len(bigrams2) == 0:
+        bigrams2.append(word2)
     intersection = len(list(set(bigrams1).intersection(set(bigrams2))))
     union = len(set(bigrams1)) + len(set(bigrams2)) - intersection
+    if union == 0:
+        return 0.0
     return float(intersection) / union
 
 
@@ -65,9 +73,13 @@ def correct_query(q, dictionary):
             modified_query[len(modified_query):] = [word]
         else:
             result_j = similar_words_j(dictionary, word)
-            if len(result_j) == 0:
-                result_l = similar_words_l(dictionary, word)
-            else:
-                result_l = similar_words_l(result_j, word)
+            result_l = similar_words_l(result_j, word)
             modified_query.append(result_l[0])
     return modified_query
+
+
+# print(jaccard_similarity("ne", "gonna"))
+# print(jaccard_similarity("a", "a"))
+#
+# print(' '.join(correct_query("jelp ne k an finna sie", ["gonna", "wanna", "me", "my", "i", "am", "a", "die", "fed",
+#                                                         "help", "welp"])))
