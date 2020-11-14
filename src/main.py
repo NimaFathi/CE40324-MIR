@@ -1,4 +1,5 @@
-from .infromation_retrieval_system import IRSystem
+# from src.infromation_retrieval_system import IRSystem
+from src.QueryCorrection import correct_query
 
 
 # print("pee pee")
@@ -27,16 +28,20 @@ while True:
         print("please enter a valid option (1 or 2)")
         op2 = int(input("1. information retrieval\n2. query correction\n"))
 
-if flag1:
-    ir = IRSystem(lang)
-    query = input("\nnow enter your query:\n")
-    wanted_outcomes = int(input("\nenter the number of outcomes you want:"))
-    temp = int(input("\nwhat retrieve type you want to use?\n1. body\t2. title\n"))
-    if temp == 1:
-        retrieve_type = "body"
-    else:
-        retrieve_type = "title"
-    ir.retrieve_query_answer(query, wanted_outcomes, retrieve_type)
+# if flag1:
+#     ir = IRSystem(lang)
+#     query = input("\nnow enter your query:\n")
+#     wanted_outcomes = int(input("\nenter the number of outcomes you want:"))
+#     temp = int(input("\nwhat retrieve type you want to use?\n1. body\t2. title\n"))
+#     if temp == 1:
+#         retrieve_type = "body"
+#     else:
+#         retrieve_type = "title"
+#     ir.retrieve_query_answer(query, wanted_outcomes, retrieve_type)
 
-elif flag2:
-    pass
+if flag2:
+    query = input("enter your misspelled query:\n")
+    dictionary = input("now enter a dictionary containing correct form of your query's words "
+                       "(and maybe other words):\n")
+    print("corrected query is:\n")
+    print(correct_query(query, dictionary.split(), 0.1))
