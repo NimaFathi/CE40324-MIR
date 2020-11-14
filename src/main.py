@@ -20,11 +20,26 @@ while True:
         print("please enter a valid option (1 or 2)")
         op1 = int(input("1. English\t2. Persian\n"))
 
-irs = IRSystem(lang)
+op2 = int(input("\nWhich system you want to use?:\n1. information retrieval\n2. query correction\n"))
+flag1, flag2 = False, False
+while True:
+    if op2 == 1:
+        flag1 = True
+        break
+    elif op2 == 2:
+        flag2 = True
+        break
+    else:
+        print("please enter a valid option (1 or 2)")
+        op2 = int(input("1. information retrieval\n2. query correction\n"))
 
-k_w = input("Please enter k & w:\n").split()
-k, w = int(k_w[0]), int(k_w[1])
-
-query = input("Now enter your query:\n")
-
-print("language: ", lang, "\nk: ", k, "\nw: ", w, "\nquery: ", query)
+if flag1:
+    ir = IRSystem(lang)
+    query = input("\nnow enter your query:\n")
+    wanted_outcomes = int(input("\nenter the number of outcomes you want:"))
+    temp = int(input("\nwhat retrieve type you want to use?\n1. body\t2. title\n"))
+    if temp == 1:
+        retrieve_type = "body"
+    else:
+        retrieve_type = "title"
+    ir.retrieve_query_answer(query, wanted_outcomes, retrieve_type)

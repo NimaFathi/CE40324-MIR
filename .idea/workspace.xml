@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="69256987-6b02-4ae5-88d7-d7b1b0013e44" name="Default Changelist" comment="fix minor bug in BigramIndex.py and PositionalIndex.py">
-      <change afterPath="$PROJECT_DIR$/src/ProximitySearch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="69256987-6b02-4ae5-88d7-d7b1b0013e44" name="Default Changelist" comment="proximity search added">
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -135,7 +133,7 @@
       <workItem from="1605278382518" duration="639000" />
       <workItem from="1605280999861" duration="14343000" />
       <workItem from="1605300791138" duration="517000" />
-      <workItem from="1605332072362" duration="3363000" />
+      <workItem from="1605332072362" duration="4215000" />
     </task>
     <task id="LOCAL-00001" summary="add pre_proccess files">
       <created>1605210720940</created>
@@ -179,7 +177,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605286643409</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="proximity search added">
+      <created>1605335517905</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1605335517905</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,7 +208,8 @@
     <MESSAGE value="update information_retrieval_system.py and add tf_idf.py" />
     <MESSAGE value="update infromation_retrieval_system.py" />
     <MESSAGE value="fix minor bug in BigramIndex.py and PositionalIndex.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix minor bug in BigramIndex.py and PositionalIndex.py" />
+    <MESSAGE value="proximity search added" />
+    <option name="LAST_COMMIT_MESSAGE" value="proximity search added" />
   </component>
   <component name="WindowStateProjectService">
     <state width="1872" height="296" key="GridCell.Tab.0.bottom" timestamp="1605298956730">
