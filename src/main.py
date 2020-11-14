@@ -1,9 +1,3 @@
-import pandas
-import xml.etree.ElementTree as xee
-
-from .BigramIndex import BiGramIndex
-from .PositionalIndex import PositionalIndex
-from .QueryCorrection import *
 from .infromation_retrieval_system import IRSystem
 
 
@@ -43,3 +37,6 @@ if flag1:
     else:
         retrieve_type = "title"
     ir.retrieve_query_answer(query, wanted_outcomes, retrieve_type)
+
+elif flag2:
+    pass

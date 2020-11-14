@@ -55,16 +55,16 @@ def similar_words_l(dictionary, in_word):
     return similars
 
 
-def correct_query(q, dictionary):
+def correct_query(q, dictionary, threshold):
     modified_query = []
-    # threshold = 0.5
-    for word in q:
+    for word in q.split():
         if word in dictionary:
             modified_query[len(modified_query):] = [word]
         else:
-            result_l = similar_words_l(dictionary, word)
-            modified_query.append(result_l)
-            # result_j = similar_words_j(dictionary, word, threshold)
-            # print(word, ":\n\n", "Jaccard: ",  result_j, "\nLevenshtein: ", result_l)
-
+            result_j = similar_words_j(dictionary, word, threshold)
+            if len(result_j) == 0:
+                result_l = similar_words_l(dictionary, word)
+            else:
+                result_l = similar_words_l(result_j, word)
+            modified_query.append(result_l[0])
     return modified_query
