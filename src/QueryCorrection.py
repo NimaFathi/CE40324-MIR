@@ -70,4 +70,4 @@ def correct_query(q, dictionary):
             else:
                 result_l = similar_words_l(result_j, word)
             modified_query.append(result_l[0])
-    return modified_query
+    return " ".join(modified_query)

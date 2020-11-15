@@ -22,4 +22,4 @@ def proximity_search(ids_, query, positional_index, window):
                 dist = max(item) - min(item)
                 if dist < window:
                     col.append(id_)
-    return TfIdfSearch(col, positional_index)
+    return TfIdfSearch(col, positional_index).answers(query, 5)

@@ -1,10 +1,11 @@
-from src.preprocess import PreProcess, PreProcessEnglish, PreProcessPersian
+from src.preprocess import PreProcessEnglish, PreProcessPersian
 import pandas as pd
 import xml.etree.ElementTree as ET
 from src.PositionalIndex import PositionalIndex
 from src.BigramIndex import BiGramIndex
 from src.tf_idf import TfIdfSearch
-import datetime
+from src.QueryCorrection import correct_query
+from src.ProximitySearch import proximity_search
 
 
 class IRSystem:
@@ -96,12 +97,14 @@ class IRSystem:
         self.raw_title_documents = doc['title']
 
     def retrieve_query_answer(self, query, no_wanted_outcomes, retrieve_type):
+        print('your query:{}'.format(query))
         clean_query = self.pre_processor.clean_query(query=query)
         if retrieve_type == 'title':
             handler = self.tf_idf_title
         else:
             handler = self.tf_idf_body
         answers_list = handler.answers(query=clean_query, no_wanted_outcomes=no_wanted_outcomes)
+        print('tf-idf search:')
         for i, (score, doc_id) in enumerate(answers_list):
             text = self.retrieve_documents(doc_id, retrieve_type)
             print('{}-answer: {} \n score:{}'.format(i, text, score))
@@ -112,10 +115,29 @@ class IRSystem:
         else:
             return self.raw_body_documents[doc_id]
 
+    def proximity_search(self, query, window, retrieve_type):
+        print('your query:{}'.format(query))
+        clean_query = self.pre_processor.tokenization(query)
+        if retrieve_type == 'title':
+            handler = self.positional_index_title
+        else:
+            handler = self.positional_index_body
+        answers_list = proximity_search(self.ids, clean_query, handler.index, window)
+        print('proximity search result:')
+        for i, (score, doc_id) in enumerate(answers_list):
+            text = self.retrieve_documents(doc_id, retrieve_type)
+            print('{}-answer: {} \n score:{}'.format(i, text, score))
+
+    def corrected_query(self, query):
+        print("corrected query:{}".format(correct_query(query, self.positional_index_body.index)))
+
 
 if __name__ == '__main__':
     ir = IRSystem('english')
+    query = 'how ar yoo my broter'
+    ir.corrected_query(query)
+
     ir.retrieve_query_answer(query='how are you?', no_wanted_outcomes=2, retrieve_type='body')
-    now = datetime.datetime.now()
     ir.retrieve_query_answer(query='computer engineering', no_wanted_outcomes=4, retrieve_type='body')
-    print(datetime.datetime.now() - now)
+
+    ir.proximity_search(query='what is makes?', window=5, retrieve_type='body')
