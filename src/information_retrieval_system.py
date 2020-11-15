@@ -97,7 +97,7 @@ class IRSystem:
         self.raw_title_documents = doc['title']
 
     def retrieve_tfidf_answer(self, query, no_wanted_outcomes, retrieve_type):
-        print('your query:{}'.format(query))
+        print('your query: {}'.format(query))
         clean_query = self.pre_processor.clean_query(query=query)
         if retrieve_type == 'title':
             handler = self.tf_idf_title
@@ -116,7 +116,7 @@ class IRSystem:
             return self.raw_body_documents[doc_id]
 
     def retrieve_proximity_answer(self, query, window, retrieve_type):
-        print('your query:{}'.format(query))
+        print('your query: {}'.format(query))
         clean_query = self.pre_processor.tokenization(query)
         if retrieve_type == 'title':
             handler = self.positional_index_title
