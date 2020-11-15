@@ -129,7 +129,9 @@ class IRSystem:
             print('{}-answer: {} \n score:{}'.format(i, text, score))
 
     def corrected_query(self, query):
-        print("corrected query:{}".format(correct_query(query, self.positional_index_body.index)))
+        q = correct_query(query, self.positional_index_body.index)
+        print("corrected query:{}".format(q))
+        return q
 
     def plot_stop_words(self):
         self.pre_processor.plot_stop_words()
