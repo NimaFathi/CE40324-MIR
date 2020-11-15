@@ -67,6 +67,7 @@ def similar_words_l(dictionary, in_word):
 
 
 def correct_query(q, dictionary):
+    # dictionary = dictionary.split()
     modified_query = []
     for word in q.split():
         if word in dictionary:
@@ -81,5 +82,5 @@ def correct_query(q, dictionary):
 # print(jaccard_similarity("ne", "gonna"))
 # print(jaccard_similarity("a", "a"))
 #
-# print(' '.join(correct_query("jelp ne k an finna sie", ["gonna", "wanna", "me", "my", "i", "am", "a", "die", "fed",
-#                                                         "help", "welp"])))
+print(correct_query("jelp ne k an finna sie", ["gonna", "wanna", "me", "my", "i", "am", "a", "die", "fed",
+                                                        "help", "welp"]))
