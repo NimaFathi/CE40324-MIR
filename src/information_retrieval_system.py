@@ -96,7 +96,7 @@ class IRSystem:
         self.title_documents = self.pre_processor.clean_documents(doc['title'], with_stop_words=True)
         self.raw_title_documents = doc['title']
 
-    def retrieve_query_answer(self, query, no_wanted_outcomes, retrieve_type):
+    def retrieve_tfidf_answer(self, query, no_wanted_outcomes, retrieve_type):
         print('your query:{}'.format(query))
         clean_query = self.pre_processor.clean_query(query=query)
         if retrieve_type == 'title':
@@ -115,7 +115,7 @@ class IRSystem:
         else:
             return self.raw_body_documents[doc_id]
 
-    def proximity_search(self, query, window, retrieve_type):
+    def retrieve_proximity_answer(self, query, window, retrieve_type):
         print('your query:{}'.format(query))
         clean_query = self.pre_processor.tokenization(query)
         if retrieve_type == 'title':
@@ -131,13 +131,23 @@ class IRSystem:
     def corrected_query(self, query):
         print("corrected query:{}".format(correct_query(query, self.positional_index_body.index)))
 
+    def plot_stop_words(self):
+        self.pre_processor.plot_stop_words()
+
 
 if __name__ == '__main__':
     ir = IRSystem('english')
+
     query = 'how ar yoo my broter'
+    # if user wants to corrects the query by IR system
     ir.corrected_query(query)
 
-    ir.retrieve_query_answer(query='how are you?', no_wanted_outcomes=2, retrieve_type='body')
-    ir.retrieve_query_answer(query='computer engineering', no_wanted_outcomes=4, retrieve_type='body')
+    # if user want to see deleted stopwords:
+    ir.plot_stop_words()
 
-    ir.proximity_search(query='what is makes?', window=5, retrieve_type='body')
+    # for tf_idf_search
+    ir.retrieve_tfidf_answer(query='how are you?', no_wanted_outcomes=2, retrieve_type='body')
+    ir.retrieve_tfidf_answer(query='computer engineering', no_wanted_outcomes=4, retrieve_type='body')
+
+    # for proximity search
+    ir.retrieve_proximity_answer(query='what is makes?', window=5, retrieve_type='body')
