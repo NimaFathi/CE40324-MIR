@@ -12,3 +12,10 @@ phase1/data
 phase1/data/
 phase2/data
 phase2/data/
+src/
+src/preprocess/
+src/preprocess/__pycache__/
+phase1/__pycache__/
+phase2/__pycache__/
+phase2/classifiers/__pycache__/
+phase2/preproccessor/__pycache__/
