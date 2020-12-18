@@ -152,4 +152,5 @@ if __name__ == '__main__':
     ir.retrieve_tfidf_answer(query='computer engineering', no_wanted_outcomes=4, retrieve_type='body')
 
     # for proximity search
-    ir.retrieve_proximity_answer(query='With all the intensity and brilliance for which he is known, Alan Kay envisions better techniques', window=5, retrieve_type='body')
+    ir.retrieve_proximity_answer(query='With all the intensity and brilliance for which he is known, '
+                                       'Alan Kay envisions better techniques', window=5, retrieve_type='body')
