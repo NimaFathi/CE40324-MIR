@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from phase2.preproccessor import PreProcessEnglish
 from phase2.positional_index import PositionalIndex
 from phase2.tf_idf_ntn import vector_tnt
-from phase2.classifiers import SoftMarginSVMClassifier, RandomForestClassifier
+from phase2.classifiers import SoftMarginSVMClassifier, RFClassifier
 
 
 class Classifier:
@@ -55,11 +55,11 @@ class Classifier:
         print('Accuracy is:{}'.format(round(accuracy, 4)))
         print('\n******************************\n')
         print('F1 with beta=1 & alpha=2: ')
-        print('first class F1: {}', format(round(class_1_f1, 4)))
+        print('first class F1: {}'.format(round(class_1_f1, 4)))
         print('Second class F1: {}'.format(round(class_2_f1, 4)))
         print('\n******************************\n')
-        print('Precision, Recall first class: {}'.format(round(precision_1, 4), round(recall_1, 4)))
-        print('Precision, Recall second class: {}'.format(round(precision_2, 4), round(recall_2, 4)))
+        print('Precision:{}, Recall:{}, first class'.format(round(precision_1, 4), round(recall_1, 4)))
+        print('Precision:{}, Recall:{} second class'.format(round(precision_2, 4), round(recall_2, 4)))
         print('\n******************************\n')
 
     @staticmethod
@@ -119,3 +119,10 @@ if __name__ == '__main__':
     classify.final_evaluation('Soft margin SVM On Training', Y_train, best_C_Y_pred_train)
     classify.final_evaluation('Soft margin SVM On Test', Y_test, best_C_Y_pred_test)
 
+    # Random Forest
+    random_forest = RFClassifier(x_train=X_train_validation, y_train=Y_train_validation)
+    random_forest.fit()
+    rf_y_pred_train = random_forest.predict(X_train_validation)
+    classify.final_evaluation("Random Forest On Training", Y_train_validation, rf_y_pred_train)
+    rf_y_pred_test = random_forest.predict(X_test)
+    classify.final_evaluation("Random Forest on Test", Y_test, rf_y_pred_test)
