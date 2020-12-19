@@ -1,33 +1,36 @@
+from .base_classifier import BaseClassifier
+
 import numpy as np
 import math
 
 
-class NaiveBayes:
+class NaiveBayesClassifier(BaseClassifier):
 
-    def __init__(self):
+    def __init__(self, x_train, y_train, classifier):
+        super().__init__(x_train, y_train, classifier)
         self.p_terms1 = None
         self.p_terms2 = None
         self.p_col1 = 0
         self.p_col2 = 0
 
-    def fit(self, x_train, y_train):
-        docs_in_col = x_train.shape[0]
-        self.p_col1 = -sum(y_train[y_train < 0]) / docs_in_col
+    def fit(self):
+        docs_in_col = self.x_train.shape[0]
+        self.p_col1 = -sum(self.y_train[self.y_train < 0]) / docs_in_col
         self.p_col2 = 1 - self.p_col1
 
         doc_freq1 = []
         doc_freq2 = []
         terms_in_col1 = 0
         terms_in_col2 = 0
-        for column in x_train.T:
-            tc1 = sum(column[y_train < 0])
+        for column in self.x_train.T:
+            tc1 = sum(column[self.y_train < 0])
             tc2 = sum(column) - tc1
             doc_freq1.append(tc1 + 1)
             terms_in_col1 += tc1
             doc_freq2.append(tc2 + 1)
             terms_in_col2 += tc2
 
-        distinct_terms_size = x_train.shape[1]
+        distinct_terms_size = self.x_train.shape[1]
         prob_terms1 = []
         for freq in doc_freq1:
             prob_terms1.append(math.log2(freq / (distinct_terms_size + terms_in_col1)))

@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from phase2.preproccessor import PreProcessEnglish
 from phase2.positional_index import PositionalIndex
 from phase2.tf_idf_ntn import vector_tnt
-from phase2.classifiers import SoftMarginSVMClassifier, RFClassifier
+from phase2.classifiers import SoftMarginSVMClassifier, RFClassifier, NaiveBayesClassifier
 
 
 class Classifier:
@@ -126,3 +126,6 @@ if __name__ == '__main__':
     classify.final_evaluation("Random Forest On Training", Y_train_validation, rf_y_pred_train)
     rf_y_pred_test = random_forest.predict(X_test)
     classify.final_evaluation("Random Forest on Test", Y_test, rf_y_pred_test)
+
+    # Naive Bayes
+
