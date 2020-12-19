@@ -1,6 +1,7 @@
 from .base_classifier import BaseClassifier
 
 import numpy as np
+import math
 from sklearn.preprocessing import StandardScaler
 
 
@@ -18,10 +19,17 @@ class KNNClassifier(BaseClassifier):
         self.x = self.standard_scaler.fit_transform(self.x_train)
         self.y = self.y_train
 
+    @staticmethod
+    def euclidean_dist(p1, p2):
+        dim, sum_ = len(p1), 0
+        for index in range(dim - 1):
+            sum_ += math.pow(p1[index] - p2[index], 2)
+        return math.sqrt(sum_)
+
     def get_neighbors(self, item):
         train = []
         for i in range(self.x.shape[0]):
-            train.append((self.y[i], abs(np.linalg.norm(item - self.x[i], 2))))
+            train.append((self.y[i], self.euclidean_dist(item, self.x[i])))
         train.sort(key=lambda t: t[1])
         neighbors = []
         for i in range(self.k):
