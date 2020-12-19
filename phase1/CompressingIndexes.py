@@ -1,5 +1,5 @@
-from src.Compressor import Compressor
-from src.PositionalIndex import PositionalIndex
+from phase1.Compressor import Compressor
+from phase1.PositionalIndex import PositionalIndex
 
 
 # this file is to help compress and decompress using the two type pf compressions defined in the cpmpressor,

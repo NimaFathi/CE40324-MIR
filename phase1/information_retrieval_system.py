@@ -1,11 +1,11 @@
-from src.preprocess import PreProcessEnglish, PreProcessPersian
+from phase1.preprocess import PreProcessEnglish, PreProcessPersian
 import pandas as pd
 import xml.etree.ElementTree as ET
-from src.PositionalIndex import PositionalIndex
-from src.BigramIndex import BiGramIndex
-from src.tf_idf import TfIdfSearch
-from src.QueryCorrection import correct_query
-from src.ProximitySearch import proximity_search
+from phase1.PositionalIndex import PositionalIndex
+from phase1.BigramIndex import BiGramIndex
+from phase1.tf_idf import TfIdfSearch
+from phase1.QueryCorrection import correct_query
+from phase1.ProximitySearch import proximity_search
 
 
 class IRSystem:
