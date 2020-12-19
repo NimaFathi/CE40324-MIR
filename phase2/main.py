@@ -128,4 +128,10 @@ if __name__ == '__main__':
     classify.final_evaluation("Random Forest on Test", Y_test, rf_y_pred_test)
 
     # Naive Bayes
+    naive_bayes = NaiveBayesClassifier(X_train_validation, Y_train_validation)
+    naive_bayes.fit()
+    nb_y_pred_train = naive_bayes.predict(X_train_validation)
+    classify.final_evaluation("Naive Bayes On Training", Y_train_validation, nb_y_pred_train)
+    nb_y_pred_test = naive_bayes.predict(X_test)
+    classify.final_evaluation("Naive Bayes On Training", Y_test, nb_y_pred_test)
 

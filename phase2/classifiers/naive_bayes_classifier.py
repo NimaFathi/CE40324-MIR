@@ -6,8 +6,9 @@ import math
 
 class NaiveBayesClassifier(BaseClassifier):
 
-    def __init__(self, x_train, y_train, classifier):
-        super().__init__(x_train, y_train, classifier)
+    def __init__(self, x_train, y_train):
+        # HOLY SHIT THAT LOOKS SO WRONG
+        super().__init__(x_train, y_train, classifier=NaiveBayesClassifier(x_train, y_train))
         self.p_terms1 = None
         self.p_terms2 = None
         self.p_col1 = 0
