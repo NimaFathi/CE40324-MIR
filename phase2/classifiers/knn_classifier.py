@@ -14,6 +14,7 @@ class KNNClassifier(BaseClassifier):
 
     def fit(self):
         self.standard_scaler.fit(self.x_train)
+        # use fit_transform on training data
         self.x = self.standard_scaler.fit_transform(self.x_train)
         self.y = self.y_train
 
@@ -28,6 +29,7 @@ class KNNClassifier(BaseClassifier):
         return neighbors
 
     def predict(self, test):
+        # use transform on test data
         x_test = self.standard_scaler.transform(test)
         y_predict = []
         for data in x_test:
