@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from phase2.preproccessor import PreProcessEnglish
 from phase2.positional_index import PositionalIndex
 from phase2.tf_idf_ntn import vector_tnt
-from phase2.classifiers import SoftMarginSVMClassifier, RFClassifier, NaiveBayesClassifier
+from phase2.classifiers import SoftMarginSVMClassifier, RFClassifier, NaiveBayesClassifier, KNNClassifier
 
 
 class Classifier:
@@ -133,5 +133,15 @@ if __name__ == '__main__':
     nb_y_pred_train = naive_bayes.predict(X_train_validation)
     classify.final_evaluation("Naive Bayes On Training", Y_train_validation, nb_y_pred_train)
     nb_y_pred_test = naive_bayes.predict(X_test)
-    classify.final_evaluation("Naive Bayes On Training", Y_test, nb_y_pred_test)
+    classify.final_evaluation("Naive Bayes On Test", Y_test, nb_y_pred_test)
+
+    # KNN
+    k = 5
+    knn = KNNClassifier(k, X_train, Y_train)
+    knn.fit()
+    knn_y_pred_val = knn.predict(X_validation)
+    classify.final_evaluation("{}NN On Validation".format(k), Y_train_validation, knn_y_pred_val)
+    knn_y_pred_test = knn.predict(X_test)
+    classify.final_evaluation("{}NN On Test".format(k), Y_test, knn_y_pred_test)
+
 
