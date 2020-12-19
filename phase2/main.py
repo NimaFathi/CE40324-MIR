@@ -95,53 +95,67 @@ if __name__ == '__main__':
     X_train, X_validation, Y_train, Y_validation = train_test_split(
         X_train_validation, Y_train_validation, test_size=0.1, random_state=42
     )
-
+    # SVM
     # در اینجا بهترین مقدار C را برای soft-margin-svm پیدا می‌کنیم
-    c_values = [0.5, 1, 1.5, 2]
-    best_C = 0
-    best_validation_acc = 0
-    best_C_Y_pred_test = None
-    best_C_Y_pred_train = None
-    for C in c_values:
-        svm = SoftMarginSVMClassifier(x_train=X_train, y_train=Y_train, C=C)
-        svm.fit()
-        y_pred_val = svm.predict(X_validation)
-        y_pred_test = svm.predict(X_test)
-        Y_pred_train = svm.predict(X_train)
-        validation_acc = (y_pred_val == Y_validation).mean()
-        if validation_acc > best_validation_acc:
-            best_validation_acc = validation_acc
-            best_C = C
-            best_C_Y_pred_test = y_pred_test
-            best_C_Y_pred_train = Y_pred_train
-        print('svm C:{} validation acc: {}'.format(C, validation_acc))
-
-    classify.final_evaluation('Soft margin SVM On Training', Y_train, best_C_Y_pred_train)
-    classify.final_evaluation('Soft margin SVM On Test', Y_test, best_C_Y_pred_test)
-
-    # Random Forest
-    random_forest = RFClassifier(x_train=X_train_validation, y_train=Y_train_validation)
-    random_forest.fit()
-    rf_y_pred_train = random_forest.predict(X_train_validation)
-    classify.final_evaluation("Random Forest On Training", Y_train_validation, rf_y_pred_train)
-    rf_y_pred_test = random_forest.predict(X_test)
-    classify.final_evaluation("Random Forest on Test", Y_test, rf_y_pred_test)
+    # c_values = [0.5, 1, 1.5, 2]
+    # best_C = 0
+    # best_validation_acc = 0
+    # best_C_Y_pred_test = None
+    # best_C_Y_pred_train = None
+    # for C in c_values:
+    #     svm = SoftMarginSVMClassifier(x_train=X_train, y_train=Y_train, C=C)
+    #     svm.fit()
+    #     y_pred_val = svm.predict(X_validation)
+    #     y_pred_test = svm.predict(X_test)
+    #     Y_pred_train = svm.predict(X_train)
+    #     validation_acc = (y_pred_val == Y_validation).mean()
+    #     if validation_acc > best_validation_acc:
+    #         best_validation_acc = validation_acc
+    #         best_C = C
+    #         best_C_Y_pred_test = y_pred_test
+    #         best_C_Y_pred_train = Y_pred_train
+    #     print('svm C:{} validation acc: {}'.format(C, validation_acc))
+    #
+    # classify.final_evaluation('Soft margin SVM On Training', Y_train, best_C_Y_pred_train)
+    # classify.final_evaluation('Soft margin SVM On Test', Y_test, best_C_Y_pred_test)
+    #
+    # # Random Forest
+    # random_forest = RFClassifier(x_train=X_train_validation, y_train=Y_train_validation)
+    # random_forest.fit()
+    # rf_y_pred_train = random_forest.predict(X_train_validation)
+    # classify.final_evaluation("Random Forest On Training", Y_train_validation, rf_y_pred_train)
+    # rf_y_pred_test = random_forest.predict(X_test)
+    # classify.final_evaluation("Random Forest on Test", Y_test, rf_y_pred_test)
 
     # Naive Bayes
-    naive_bayes = NaiveBayesClassifier(X_train_validation, Y_train_validation)
-    naive_bayes.fit()
-    nb_y_pred_train = naive_bayes.predict(X_train_validation)
-    classify.final_evaluation("Naive Bayes On Training", Y_train_validation, nb_y_pred_train)
-    nb_y_pred_test = naive_bayes.predict(X_test)
-    classify.final_evaluation("Naive Bayes On Test", Y_test, nb_y_pred_test)
+    # naive_bayes = NaiveBayesClassifier(X_train_validation, Y_train_validation)
+    # naive_bayes.fit()
+    # nb_y_pred_train = naive_bayes.predict(X_train_validation)
+    # classify.final_evaluation("Naive Bayes On Training", Y_train_validation, nb_y_pred_train)
+    # nb_y_pred_test = naive_bayes.predict(X_test)
+    # classify.final_evaluation("Naive Bayes On Test", Y_test, nb_y_pred_test)
 
     # KNN
-    k = 5
-    knn = KNNClassifier(k, X_train, Y_train)
-    knn.fit()
-    knn_y_pred_val = knn.predict(X_validation)
-    classify.final_evaluation("{}NN On Validation".format(k), Y_train_validation, knn_y_pred_val)
-    knn_y_pred_test = knn.predict(X_test)
-    classify.final_evaluation("{}NN On Test".format(k), Y_test, knn_y_pred_test)
+    K_VALUES = [1, 5, 9]
+    best_K = 0
+    best_knn_validation_acc = 0
+    best_K_Y_pred_test = None
+    best_K_Y_pred_train = None
+
+    for k in K_VALUES:
+        knn = KNNClassifier(k, X_train, Y_train)
+        knn.fit()
+        knn_y_pred_val = knn.predict(X_validation)
+        knn_validation_acc = (knn_y_pred_val == Y_validation).mean()
+        knn_y_pred_test = knn.predict(X_test)
+        knn_y_pred_train = knn.predict(X_train)
+        if knn_validation_acc > best_knn_validation_acc:
+            best_K = k
+            best_K_Y_pred_test = knn_y_pred_test
+            best_K_Y_pred_train = knn_y_pred_train
+        print('k-nn K:{} validation acc: {}'.format(k, knn_validation_acc))
+
+    classify.final_evaluation("{}NN On Validation".format(best_K), Y_train_validation, best_K_Y_pred_train)
+    classify.final_evaluation("{}NN On Test".format(best_K), Y_test, best_K_Y_pred_test)
 
 
