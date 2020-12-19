@@ -14,18 +14,10 @@ class KNNClassifier(BaseClassifier):
         self.standard_scaler.fit(self.x_train)
         self.x_train = self.standard_scaler.transform(self.x_train)
 
-    @staticmethod
-    def majority(lst):
-        return max(set(lst), key=lst.count)
-
-    @staticmethod
-    def distance(v1, v2):
-        return abs(np.linalg.norm(v2 - v1, 2))
-
     def neighbors(self, x):
         train = []
         for i in range(self.x_train.shape[0]):
-            train.append((self.y_train[i], self.distance(self.x_train[i], x)))
+            train.append((self.y_train[i], abs(np.linalg.norm(x - self.x_train[i], 2))))
         train.sort(key=lambda t: t[1])
         return [train[i][0] for i in range(self.k)]
 
@@ -33,5 +25,5 @@ class KNNClassifier(BaseClassifier):
         x_test = self.standard_scaler.transform(test)
         y_pred = []
         for data in x_test:
-            y_pred.append(self.majority(self.neighbors(data)))
+            y_pred.append(max(set(self.neighbors(data)), key=self.neighbors(data).count))
         return np.array(y_pred)
