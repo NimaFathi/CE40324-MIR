@@ -7,7 +7,7 @@ import math
 class NaiveBayesClassifier(BaseClassifier):
 
     def __init__(self, x_train, y_train):
-        # HOLY SHIT THAT LOOKS SO WRONG
+        # HOLY SHIT THAT LOOKS SO WRONG (fixed, but i like this comment ngl)
         super().__init__(x_train, y_train, classifier=None)
         self.p_terms1 = None
         self.p_terms2 = None

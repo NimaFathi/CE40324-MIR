@@ -9,21 +9,28 @@ class KNNClassifier(BaseClassifier):
         super().__init__(x_train, y_train, classifier=None)
         self.k = k
         self.standard_scaler = StandardScaler()
+        self.x = None
+        self.y = None
 
     def fit(self):
         self.standard_scaler.fit(self.x_train)
-        self.x_train = self.standard_scaler.transform(self.x_train)
+        self.x = self.standard_scaler.transform(self.x_train)
+        self.y = self.y_train
 
-    def neighbors(self, x):
+    def get_neighbors(self, item):
         train = []
-        for i in range(self.x_train.shape[0]):
-            train.append((self.y_train[i], abs(np.linalg.norm(x - self.x_train[i], 2))))
+        for i in range(self.x.shape[0]):
+            train.append((self.y[i], abs(np.linalg.norm(item - self.x[i], 2))))
         train.sort(key=lambda t: t[1])
-        return [train[i][0] for i in range(self.k)]
+        neighbors = []
+        for i in range(self.k):
+            neighbors.append(train[i][0])
+        return neighbors
 
     def predict(self, test):
         x_test = self.standard_scaler.transform(test)
-        y_pred = []
+        y_predict = []
         for data in x_test:
-            y_pred.append(max(set(self.neighbors(data)), key=self.neighbors(data).count))
-        return np.array(y_pred)
+            neighbors = self.get_neighbors(data)
+            y_predict.append(max(set(neighbors), key=neighbors.count))
+        return np.array(y_predict)
