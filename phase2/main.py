@@ -6,11 +6,15 @@ from phase2.preproccessor import PreProcessEnglish
 from phase2.positional_index import PositionalIndex
 from phase2.tf_idf_ntn import vector_tnt
 from phase2.classifiers import SoftMarginSVMClassifier, RFClassifier, NaiveBayesClassifier, KNNClassifier
+from phase1.tf_idf import TfIdfSearch
 
 
 class Classifier:
     def __init__(self, preprocessor):
         self.processor = preprocessor
+        self.irs_pi = None
+        self.irs_doc_ids = None
+        self.irs_docs = None
 
     def read_ted_talk(self):
         file_name = 'data/ted_talks.csv'
@@ -20,6 +24,9 @@ class Classifier:
         ted_doc_ids = list(range(len(ted_docs)))
         ted_positional_index = PositionalIndex(name=file_name, docs=ted_docs, ids=ted_doc_ids)
         ted_positional_index.construct_doc_list(ted_titles, ted_doc_ids)
+        self.irs_pi = ted_positional_index
+        self.irs_doc_ids = ted_doc_ids
+        self.irs_docs = ted_docs
         return ted_doc_ids, ted_positional_index
 
     def read_data(self, file_name):
@@ -41,6 +48,23 @@ class Classifier:
         x_test = vector_tnt(position_indexes=pi_test.index, dictionary=dictionary, document_ids=ids_test)
         x_ted_dataset = vector_tnt(position_indexes=pi_ted.index, dictionary=dictionary, document_ids=ids_ted)
         return np.array(x_train), np.array(y_train), np.array(x_test), np.array(y_test), np.array(x_ted_dataset),
+
+    def retrieve_tfidf_answer(self, query, no_wanted_outcomes, X, classifier, class_number):
+        print('your query: {}'.format(query))
+        clean_query = self.processor.clean_query(query=query)
+
+        handler = TfIdfSearch(self.irs_doc_ids, self.irs_pi.index)
+        answers_list = handler.answers(query=clean_query, no_wanted_outcomes=int(2.5*no_wanted_outcomes))
+        print('tf-idf with classifying:')
+        Y = classifier.predict(X)
+        count = 0
+        for i, (score, doc_id) in enumerate(answers_list):
+            if Y[i] == class_number:
+                count += 1
+                text = self.irs_docs[doc_id]
+                print('{}-answer:{} \n score:{}'.format(count, " ".join(text), score))
+            if count >= no_wanted_outcomes:
+                break
 
     # بخش سوم فاز دوم
     def final_evaluation(self, classifier_name, y_true, y_pred):
@@ -118,14 +142,20 @@ if __name__ == '__main__':
     #
     # classify.final_evaluation('Soft margin SVM On Training', Y_train, best_C_Y_pred_train)
     # classify.final_evaluation('Soft margin SVM On Test', Y_test, best_C_Y_pred_test)
-    #
-    # # Random Forest
-    # random_forest = RFClassifier(x_train=X_train_validation, y_train=Y_train_validation)
-    # random_forest.fit()
-    # rf_y_pred_train = random_forest.predict(X_train_validation)
-    # classify.final_evaluation("Random Forest On Training", Y_train_validation, rf_y_pred_train)
-    # rf_y_pred_test = random_forest.predict(X_test)
-    # classify.final_evaluation("Random Forest on Test", Y_test, rf_y_pred_test)
+    # classify.retrieve_tfidf_answer(
+    #     query='how are you my friend?',
+    #     no_wanted_outcomes=10,
+    #     X=X_ted, classifier=svm,
+    #     class_number=1
+    # )
+
+    # Random Forest
+    random_forest = RFClassifier(x_train=X_train_validation, y_train=Y_train_validation)
+    random_forest.fit()
+    rf_y_pred_train = random_forest.predict(X_train_validation)
+    classify.final_evaluation("Random Forest On Training", Y_train_validation, rf_y_pred_train)
+    rf_y_pred_test = random_forest.predict(X_test)
+    classify.final_evaluation("Random Forest on Test", Y_test, rf_y_pred_test)
 
     # Naive Bayes
     # naive_bayes = NaiveBayesClassifier(X_train_validation, Y_train_validation)
@@ -134,28 +164,26 @@ if __name__ == '__main__':
     # classify.final_evaluation("Naive Bayes On Training", Y_train_validation, nb_y_pred_train)
     # nb_y_pred_test = naive_bayes.predict(X_test)
     # classify.final_evaluation("Naive Bayes On Test", Y_test, nb_y_pred_test)
-
+    #
     # KNN
-    K_VALUES = [1, 5, 9]
-    best_K = 0
-    best_knn_validation_acc = 0
-    best_K_Y_pred_test = None
-    best_K_Y_pred_train = None
-
-    for k in K_VALUES:
-        knn = KNNClassifier(k, X_train, Y_train)
-        knn.fit()
-        knn_y_pred_val = knn.predict(X_validation)
-        knn_validation_acc = (knn_y_pred_val == Y_validation).mean()
-        knn_y_pred_test = knn.predict(X_test)
-        knn_y_pred_train = knn.predict(X_train)
-        if knn_validation_acc > best_knn_validation_acc:
-            best_K = k
-            best_K_Y_pred_test = knn_y_pred_test
-            best_K_Y_pred_train = knn_y_pred_train
-        print('k-nn K:{} validation acc: {}'.format(k, knn_validation_acc))
-
-    classify.final_evaluation("{}NN On Validation".format(best_K), Y_train_validation, best_K_Y_pred_train)
-    classify.final_evaluation("{}NN On Test".format(best_K), Y_test, best_K_Y_pred_test)
-
-
+    # K_VALUES = [1, 5, 9]
+    # best_K = 0
+    # best_knn_validation_acc = 0
+    # best_K_Y_pred_test = None
+    # best_K_Y_pred_train = None
+    #
+    # for k in K_VALUES:
+    #     knn = KNNClassifier(k=k,x_train=X_train, y_train=Y_train)
+    #     knn.fit()
+    #     knn_y_pred_val = knn.predict(X_validation)
+    #     knn_validation_acc = (knn_y_pred_val == Y_validation).mean()
+    #     knn_y_pred_test = knn.predict(X_test)
+    #     knn_y_pred_train = knn.predict(X_train)
+    #     if knn_validation_acc > best_knn_validation_acc:
+    #         best_K = k
+    #         best_K_Y_pred_test = knn_y_pred_test
+    #         best_K_Y_pred_train = knn_y_pred_train
+    #     print('k-nn K:{} validation acc: {}'.format(k, knn_validation_acc))
+    #
+    # classify.final_evaluation("{}NN On Validation".format(best_K), Y_train_validation, best_K_Y_pred_train)
+    # classify.final_evaluation("{}NN On Test".format(best_K), Y_test, best_K_Y_pred_test)

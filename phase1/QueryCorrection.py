@@ -77,10 +77,3 @@ def correct_query(q, dictionary):
             result_l = similar_words_l(result_j, word)
             modified_query.append(result_l[0])
     return " ".join(modified_query)
-
-
-# print(jaccard_similarity("ne", "gonna"))
-# print(jaccard_similarity("a", "a"))
-#
-print(correct_query("jelp ne k an finna sie", ["gonna", "wanna", "me", "my", "i", "am", "a", "die", "fed",
-                                                        "help", "welp"]))

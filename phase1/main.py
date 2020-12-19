@@ -1,5 +1,5 @@
-from src.information_retrieval_system import IRSystem
-from src.QueryCorrection import correct_query
+from phase1.information_retrieval_system import IRSystem
+from phase1.QueryCorrection import correct_query
 
 
 # print("pee pee")
