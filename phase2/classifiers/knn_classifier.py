@@ -14,9 +14,11 @@ class KNNClassifier(BaseClassifier):
         self.y = None
 
     def fit(self):
-        self.standard_scaler.fit(self.x_train)
-        # use fit_transform on training data
-        self.x = self.standard_scaler.fit_transform(self.x_train)
+        # self.standard_scaler.fit(self.x_train)
+        # # use fit_transform on training data
+        # self.x = self.standard_scaler.fit_transform(self.x_train)
+        # self.y = self.y_train
+        self.x = self.x_train
         self.y = self.y_train
 
     @staticmethod
