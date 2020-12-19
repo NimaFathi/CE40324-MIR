@@ -14,7 +14,7 @@ class KNNClassifier(BaseClassifier):
 
     def fit(self):
         self.standard_scaler.fit(self.x_train)
-        self.x = self.standard_scaler.transform(self.x_train)
+        self.x = self.standard_scaler.fit_transform(self.x_train)
         self.y = self.y_train
 
     def get_neighbors(self, item):
