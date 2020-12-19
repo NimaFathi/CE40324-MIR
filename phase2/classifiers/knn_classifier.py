@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler
 
 class KNNClassifier(BaseClassifier):
     def __init__(self, k, x_train, y_train):
-        super().__init__(x_train, y_train, classifier=KNNClassifier(k, x_train, y_train))
+        super().__init__(x_train, y_train, classifier=None)
         self.k = k
         self.standard_scaler = StandardScaler()
 
