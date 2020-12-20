@@ -66,6 +66,35 @@ class Classifier:
             if count >= no_wanted_outcomes:
                 break
 
+    def search_test(self, prox =False, ir, doc_id, search_title= False):
+
+        n = len(ir.doc_ids)
+        k = 10
+        p_idx = ir.tpi.index if search_title else ir.pi.index
+        docs = ir.title_processed_docs if search_title else ir.processed_docs
+
+        # input query and window size
+        query = input("Please enter a correct query: \n")
+        if prox:
+            w = int(input("Please enter proximity window size: \n"))
+
+        processed_query = ir.processor.process_docs([query], find_stopwords=False)[0]
+        print("Initial query: ", query)
+        print("Processed query: ", processed_query)
+        #
+        # # retrieve docs
+        # if prox:
+        #     retrieved = proximity_search(n, doc_ids, processed_query, p_idx, w, k)
+        #     print(f'Top {len(retrieved)} doc using proximity search - window size = {w}:')
+        # else:
+        #     retrieved = tf_idf_search(n, doc_ids, processed_query, p_idx, k)
+        #     print(f'Top {len(retrieved)} doc using tf-idf search:')
+        #
+        # # pring result
+        # for i, (doc_id, score) in enumerate(retrieved):
+        #     print(f'{i + 1:2d}. ID: {doc_id:5d}, Score: {score:.5f}')
+        #     print(docs[ir.doc_ids.index(doc_id)])
+
     # بخش سوم فاز دوم
     def final_evaluation(self, classifier_name, y_true, y_pred):
         conf_matrix = confusion_matrix(y_true=y_true, y_pred=y_pred)
