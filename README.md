@@ -12,7 +12,7 @@ A modern information retreival system, works on English & Persian languages with
 To run this project on your local machine:
 * [Clone](https://github.com/NimaFathi/CE40324-MIR.git) <br>
 * [Install Requirements using pip](https://pip.pypa.io/en/stable/)<br>
-* [Run main.py] - run main.py in each phase  
+* Run main.py - run main.py in each phase  
 
 ### Prerequisites
 
@@ -30,11 +30,11 @@ seaborn
 
 # phase 1
 
-* [Cleaning Query] <br>
-* [Removing StopWords] <br>
-* [Error Correction in Query] <br>
-* [TF-IDF Search] <br>
-* [Proximity Search]
+* Cleaning Query <br>
+* Removing StopWords <br>
+* Error Correction in Query <br>
+* TF-IDF Search <br>
+* Proximity Search
 
 As I explained above you should use main.py in phase1/main.py, then run it , that is a simple GUI like below:
 
@@ -48,13 +48,14 @@ As I explained above you should use main.py in phase1/main.py, then run it , tha
 
 
 # phase 2
+You can see persian documentation in this [Link](https://mirteam.slite.com/api/s/note/Ug2ZuzBRyne6Fc8xZams7V/bazyaby-pyshrfth-atalaaat)
 
-* [Naiive Bayse classifier]
-* [K-NN]
-* [SVM (soft version)
-* [Random Forest]]
-* [Multiple Evaluation on Methods]
-* [TF-IDF Using Classifiers]
+* Naiive Bayse classifier
+* K-NN
+* SVM (soft version)
+* Random Forest
+* Multiple Evaluation on Methods
+* TF-IDF Using Classifiers
 
 ### Naive Bayes 
 Run F1, Accuracy, Precision, Recall evaluating parameters.
