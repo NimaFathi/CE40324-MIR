@@ -56,6 +56,28 @@ As I explained above you should use main.py in phase1/main.py, then run it , tha
 * [Multiple Evaluation on Methods]
 * [TF-IDF Using Classifiers]
 
+### Naive Bayes 
+
+![NaiveBayes](https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/naive_bayes.png)
+
+### Random Forest
+
+![Random Forest](https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/RF.png)
+
+
+### K-NN
+
+![K-NN](https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/KNN.png)
+![K-NN](https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/KNN-validation.png)
+
+### SVM
+
+Finding best C for soft margin SVM and run F1, Accuracy, Precision, Recall evaluating parameters,
+
+![SVM](https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/svm.png)
+
+### 
+
 ### Navigation
 
 See list of files below and what do they peresents:
