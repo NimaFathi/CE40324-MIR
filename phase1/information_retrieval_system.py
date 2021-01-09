@@ -70,7 +70,7 @@ class IRSystem:
         }
 
     def persian_system(self):
-        tree = ET.parse('../data/Persian.xml')
+        tree = ET.parse('../phase1/data/Persian.xml')
         namespace = '{http://www.mediawiki.org/xml/export-0.10/}'
         direct_child = namespace + 'page'
         root = tree.getroot()
@@ -88,7 +88,7 @@ class IRSystem:
         self.raw_title_documents = title_documents
 
     def english_system(self):
-        doc = pd.read_csv("../data/ted_talks.csv")
+        doc = pd.read_csv("../phase1/data/ted_talks.csv")
         self.pre_processor = PreProcessEnglish()
         self.raw_body_documents = doc['description']
         self.body_documents = self.pre_processor.clean_documents(doc['description'])
@@ -123,10 +123,11 @@ class IRSystem:
         else:
             handler = self.positional_index_body
         answers_list = proximity_search(self.ids, clean_query, handler.index, window)
+        print(answers_list)
         print('proximity search result:')
         for i, (score, doc_id) in enumerate(answers_list):
             text = self.retrieve_documents(doc_id, retrieve_type)
-            print('{}-answer: {} \n score:{}'.format(i, text, score))
+            print('{}-answer: {} \n '.format(i, text))
 
     def corrected_query(self, query):
         q = correct_query(query, self.positional_index_body.index)
