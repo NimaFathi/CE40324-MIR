@@ -84,7 +84,7 @@ End with an example of getting some data out of the system or using it for a lit
 ## Code Contributors
 
 This project exists thanks to all the people who contribute. 
-<a href="https://github.com/kefranabg/readme-md-generator/graphs/contributors"><img src="https://opencollective.com/readme-md-generator/contributors.svg?width=890&button=false" /></a>
+<a href="https://github.com/NimaFathi/CE40324-MIR/graphs/contributors"><img src="https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/contributers.png" /></a>
 
 
 ## Show your support
