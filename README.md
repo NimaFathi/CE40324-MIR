@@ -57,24 +57,27 @@ As I explained above you should use main.py in phase1/main.py, then run it , tha
 * [TF-IDF Using Classifiers]
 
 ### Naive Bayes 
+Run F1, Accuracy, Precision, Recall evaluating parameters.
 
 ![NaiveBayes](https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/naive_bayes.png)
 
 ### Random Forest
+Run F1, Accuracy, Precision, Recall evaluating parameters.
 
 ![Random Forest](https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/RF.png)
 
 
 ### K-NN
+Find best K in KNN algorithm and run F1, Accuracy, Precision, Recall evaluating parameters.
 
 ![K-NN](https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/KNN.png)
 ![K-NN](https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/KNN-validation.png)
 
 ### SVM
 
-Finding best C for soft margin SVM and run F1, Accuracy, Precision, Recall evaluating parameters,
+Finding best C for soft margin SVM and run F1, Accuracy, Precision, Recall evaluating parameters.
 
-![SVM](https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/svm.png)
+![SVM](https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/SVM.png)
 
 ### 
 
