@@ -1,11 +1,6 @@
 <h1 align="center">CE40324-MIR 👋</h1>
-<h2 align="center">Phase 1</h2>
+A modern information retreival system, works on English & Persian languages with various features.
 
-A modern information retreival system, works on English & Persian languages. Using Proximity Search and TF-IDF Search, Error Correction, Indexing and Compressing methods.
-
-<h2 align="center">Phase 2</h2>
-
-Implementing Classifying Algorithms such as Naive Bayes, K-NN, SVM and Random Forest. Compare these methods on different aspects to see which one does better on text data. Improve MIR Systetm in phase 1 via using these methods.
 <p>
   <a href="#" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
@@ -15,9 +10,9 @@ Implementing Classifying Algorithms such as Naive Bayes, K-NN, SVM and Random Fo
 ## Getting Started
 
 To run this project on your local machine:
-* [Clone](https://github.com/NimaFathi/CE40324-MIR.git)
-*[Install Requirements using pip](https://pip.pypa.io/en/stable/)
-*[Run main.py] - run main.py in each phase 
+* [Clone](https://github.com/NimaFathi/CE40324-MIR.git) <br>
+* [Install Requirements using pip](https://pip.pypa.io/en/stable/)<br>
+* [Run main.py] - run main.py in each phase  
 
 ### Prerequisites
 
@@ -35,11 +30,11 @@ seaborn
 
 # phase 1
 
-*[Cleaning Query]
-*[Removing StopWords]
-*[Error Correction in Query]
-*[TF-IDF Search]
-*[Proximity Search]
+* [Cleaning Query] <br>
+* [Removing StopWords] <br>
+* [Error Correction in Query] <br>
+* [TF-IDF Search] <br>
+* [Proximity Search]
 
 As I explained above you should use main.py in phase1/main.py, then run it , that is a simple GUI like below:
 
@@ -51,14 +46,15 @@ As I explained above you should use main.py in phase1/main.py, then run it , tha
 
 ![Proximity](https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/mir1.png)
 
+
 # phase 2
 
-*[Naiive Bayse classifier]
-*[K-NN]
-*[SVM (soft version)
-*[Random Forest]]
-*[Multiple Evaluation on Methods]
-*[TF-IDF Using Classifiers]
+* [Naiive Bayse classifier]
+* [K-NN]
+* [SVM (soft version)
+* [Random Forest]]
+* [Multiple Evaluation on Methods]
+* [TF-IDF Using Classifiers]
 
 ### Navigation
 
