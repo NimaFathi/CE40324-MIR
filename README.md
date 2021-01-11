@@ -28,7 +28,7 @@ seaborn
 
 ## Features
 
-# phase 1
+### phase 1
 
 * Cleaning Query <br>
 * Removing StopWords <br>
@@ -42,12 +42,12 @@ As I explained above you should use main.py in phase1/main.py, then run it , tha
 
 ![TF-IDF](https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/mir1.png)
 
-### Proximity search
+#### Proximity search
 
 ![Proximity](https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/mir1.png)
 
 
-# phase 2
+### phase 2
 You can see persian documentation in this [Link](https://mirteam.slite.com/api/s/note/Ug2ZuzBRyne6Fc8xZams7V/bazyaby-pyshrfth-atalaaat)
 
 * Naiive Bayse classifier
