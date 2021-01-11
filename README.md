@@ -14,7 +14,7 @@ To run this project on your local machine:
 * [Install Requirements using pip](https://pip.pypa.io/en/stable/)<br>
 * Run main.py - run main.py in each phase  
 
-### Prerequisites
+## Prerequisites
 
 we used different python libraries in this project, the most important requirements listed below:
 ```
@@ -38,7 +38,7 @@ seaborn
 
 As I explained above you should use main.py in phase1/main.py, then run it , that is a simple GUI like below:
 
-### TF-IDF Search
+#### TF-IDF Search
 
 ![TF-IDF](https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/mir1.png)
 
@@ -57,48 +57,28 @@ You can see persian documentation in this [Link](https://mirteam.slite.com/api/s
 * Multiple Evaluation on Methods
 * TF-IDF Using Classifiers
 
-### Naive Bayes 
+#### Naive Bayes 
 Run F1, Accuracy, Precision, Recall evaluating parameters.
 
 ![NaiveBayes](https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/naive_bayes.png)
 
-### Random Forest
+#### Random Forest
 Run F1, Accuracy, Precision, Recall evaluating parameters.
 
 ![Random Forest](https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/RF.png)
 
 
-### K-NN
+#### K-NN
 Find best K in KNN algorithm and run F1, Accuracy, Precision, Recall evaluating parameters.
 
 ![K-NN](https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/KNN.png)
 ![K-NN](https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/KNN-validation.png)
 
-### SVM
+#### SVM
 
 Finding best C for soft margin SVM and run F1, Accuracy, Precision, Recall evaluating parameters.
 
-![SVM](https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/SVM.png)
-
-### 
-
-### Navigation
-
-See list of files below and what do they peresents:
-
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
+![SVM](https://github.com/NimaFathi/CE40324-MIR/blob/master/static_files/SVM.png) 
 
 ## Author
 
@@ -116,6 +96,3 @@ This project exists thanks to all the people who contribute.
 ## Show your support
 
 Give a ⭐️ if this project helped you!
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
