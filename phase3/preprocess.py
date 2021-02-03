@@ -5,8 +5,8 @@ from sklearn.decomposition import PCA
 from .clustering import load_data, vectorize
 
 english_numerics = '0123456789'
-persian_puncts = '\u060C\u061B\u061F\u0640\u066A\u066B\u066C'
 persian_numerics = '\u06F0\u06F1\u06F2\u06F3\u06F4\u06F5\u06F6\u06F7\u06F8\u06F9'
+persian_puncts = '\u060C\u061B\u061F\u0640\u066A\u066B\u066C'
 chars_to_remove = string.punctuation + persian_puncts + persian_numerics + english_numerics
 
 persian_conjuction = {'از', 'به', 'با', 'بر', 'برای', 'در', 'و', 'که', 'را'}
