@@ -51,6 +51,10 @@ traitlets==5.0.5
 urllib3==1.25.8
 wcwidth==0.2.5
 webencodings==0.5.1
-sklearn
-beautifulsoup4
-selenium
+sklearn~=0.0
+beautifulsoup4~=4.9.3
+selenium~=3.141.0
+preprocess~=2.0.0
+scikit-learn~=0.23.2
+yellowbrick~=1.2.1
+gensim~=3.8.3
