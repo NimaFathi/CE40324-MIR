@@ -82,4 +82,19 @@ def load_data(file='./files/hamshahri.json', stem=False, lemmatize=True, remove_
     return data, major_labels, minor_labels
 
 
+# this part is for turning the tests into vectors using 
+# TFIDF and W2V from the gensim model library
+
+def vectorize(data, w2v_options=None, tf_idf_options=None):
+    n = 100
+    w2v_options = w2v_options or dict(workers=8, iter=n)
+    tf_idf_options = tf_idf_options or dict()
+    vectorizer = TfidfVectorizer(**tf_idf_options)
+    tf_idf = vectorizer.fit_transform(data['terms'])
+# split the data with their spaces and turn it into a vector 
+
+    model = Word2Vec(data['terms'].apply(lambda x: x.split(' ')), **w2v_options)
+    w2v = np.array(data['terms'].apply( lambda x: sum(model.wv[y] if y in model.wv else 0 for y in x.split(' ')) / len(x.split(' '))).to_list())
+    return tf_idf, w2v
+
 
