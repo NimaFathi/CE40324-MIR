@@ -9,7 +9,7 @@ papers_json = 'crawled_papers.json'
 
 
 class Crawler:
-    def __init__(self, limit=5000, wait=10):
+    def __init__(self, limit=5000, wait=4):
         self.driver = None
         self.reload_driver()
         self.crawl_limit = limit
@@ -27,7 +27,7 @@ class Crawler:
 
     def reload_driver(self):
         options = webdriver.ChromeOptions()
-        options.add_argument('--headless')
+        # options.add_argument('--headless')
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument('--user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) ' +
                              'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36"')
@@ -64,11 +64,14 @@ class Crawler:
         self.driver.quit()
 
     def delayed(self):
-        now = time.time()
+        delayed_time = 0
         loaded = False
-        while not loaded and time.time() - now < self.max_wait_time:
+        while not loaded and delayed_time < self.max_wait_time:
             time.sleep(1)
+            delayed_time += 1
             loaded = '<div class="primary_paper">' in self.driver.page_source
+        if not loaded:
+            loaded = '<div class="paper-family">' in self.driver.page_source
         return loaded
 
     def get_html(self, paper_id):
