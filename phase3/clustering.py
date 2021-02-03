@@ -1,10 +1,6 @@
-
-
 from sklearn.cluster import KMeans, AgglomerativeClustering
 from sklearn.mixture import GaussianMixture
-from sklearn.metrics import homogeneity_score, v_measure_score, adjusted_rand_score, completeness_score
 from sklearn.decomposition import PCA
-
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -12,15 +8,10 @@ import functools
 from sklearn.feature_extraction.text import TfidfVectorizer
 from gensim.models import Word2Vec
 import numpy as np
-from collections import defaultdict
-from tqdm import tqdm
-import itertools
 
 from sklearn.manifold import TSNE
 
-
-from preprocess import preprocessed_terms
-
+from .preprocess import preprocessed_terms
 
 
 def kmeans(data, vectors, n_components=None, **kwargs):
@@ -45,11 +36,10 @@ def GMM(data, vectors, n_components=None, **kwargs):
     return model.predict(vectors), sizes
 
 
+# cluster type is one of the above three algorithm types
+# unindent?
 
-# cluster type is one of the above three algorithm types 
-
- def return_clustered_csv(data, cluster_type, tfidf = None, w2v=None, options=None, save=False):
-
+def return_clustered_csv(data, cluster_type, tfidf=None, w2v=None, options=None, save=False):
     options = options or dict()
     result = pd.DataFrame({'link': data['link']})
     name = f'{cluster_type.__name__}' + ('' if not options else (
@@ -68,13 +58,13 @@ def GMM(data, vectors, n_components=None, **kwargs):
         result[['link', 'w2v']].rename(columns={'link': 'link', 'w2v': 'pred'}).to_csv(
             f'outputs/{cluster_type.__name__}-w2v.csv')
 
-    return result 
+    return result
 
 
 def plot2d(vectors, labels, true_labels=None, sizes=None, title=None):
     n_components = 2
-    pca = PCA(n_components, random_state=random_state)
-    vector =  pca.fit_transform(vectors)
+    pca = PCA(n_components, random_state=666)
+    vector = pca.fit_transform(vectors)
     vector_tsne = TSNE(n_components=n_components).fit_transform(vectors)
 
     if sizes is not None:
@@ -97,8 +87,6 @@ def plot2d(vectors, labels, true_labels=None, sizes=None, title=None):
             fig.suptitle(title)
         return
 
-    
-    
     plt.scatter(vector[:, 0], vector[:, 1], c=labels, s=sizes)
     if title:
         plt.title(title)
@@ -117,13 +105,13 @@ def load_data(file='./files/hamshahri.json', stem=False, lemmatize=True, remove_
                           join=join))
     return data, major_labels, minor_labels
 
+
 def mapped_labels(column):
     label_mapping = {label: i for i, label in enumerate(column.unique())}
     return label_mapping
 
 
-
-# this part is for turning the tests into vectors using 
+# this part is for turning the tests into vectors using
 # TFIDF and W2V from the gensim model library
 
 def vectorize(data, w2v_options=None, tf_idf_options=None):
@@ -132,10 +120,9 @@ def vectorize(data, w2v_options=None, tf_idf_options=None):
     tf_idf_options = tf_idf_options or dict()
     vectorizer = TfidfVectorizer(**tf_idf_options)
     tf_idf = vectorizer.fit_transform(data['terms'])
-# split the data with their spaces and turn it into a vector 
+    # split the data with their spaces and turn it into a vector
 
     model = Word2Vec(data['terms'].apply(lambda x: x.split(' ')), **w2v_options)
-    w2v = np.array(data['terms'].apply( lambda x: sum(model.wv[y] if y in model.wv else 0 for y in x.split(' ')) / len(x.split(' '))).to_list())
+    w2v = np.array(data['terms'].apply(
+        lambda x: sum(model.wv[y] if y in model.wv else 0 for y in x.split(' ')) / len(x.split(' '))).to_list())
     return tf_idf, w2v
-
-
