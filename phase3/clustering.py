@@ -73,13 +73,18 @@ def GMM(data, vectors, n_components=None, **kwargs):
 def load_data(file='./files/hamshahri.json', stem=False, lemmatize=True, remove_conjunctions=False, join=' '):
     data = pd.read_json(file, encoding='utf-8')
     data['major_cls'], data['minor_cls'] = zip(*data['tags'].map(lambda x: tuple(x[0].split('>'))))
-    major_labels, minor_labels = number_classes(data['major_cls']), number_classes(data['minor_cls'])
+    major_labels, minor_labels = mapped_labels(data['major_cls']), mapped_labels(data['minor_cls'])
     data['major_cls'] = data['major_cls'].apply(lambda x: major_labels[x])
     data['minor_cls'] = data['minor_cls'].apply(lambda x: minor_labels[x])
     data['terms'] = (data['title'] + ' ' + data['summary']).apply(
         functools.partial(preprocessed_terms, stem=stem, lemmatize=lemmatize, remove_conjunctions=remove_conjunctions,
                           join=join))
     return data, major_labels, minor_labels
+
+def mapped_labels(column):
+    label_mapping = {label: i for i, label in enumerate(column.unique())}
+    return label_mapping
+
 
 
 # this part is for turning the tests into vectors using 
