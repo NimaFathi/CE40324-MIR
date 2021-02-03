@@ -17,7 +17,7 @@ from tqdm import tqdm
 import itertools
 
 
-
+from preprocess import preprocessed_terms
 
 
 
@@ -65,4 +65,36 @@ def GMM(data, vectors, n_components=None, **kwargs):
             f'outputs/{cluster_type.__name__}-tfidf.csv')
         result[['link', 'w2v']].rename(columns={'link': 'link', 'w2v': 'pred'}).to_csv(
             f'outputs/{cluster_type.__name__}-w2v.csv')
-    return result   
+
+    return result 
+
+
+
+def load_data(file='./files/hamshahri.json', stem=False, lemmatize=True, remove_conjunctions=False, join=' '):
+    data = pd.read_json(file, encoding='utf-8')
+    data['major_cls'], data['minor_cls'] = zip(*data['tags'].map(lambda x: tuple(x[0].split('>'))))
+    major_labels, minor_labels = number_classes(data['major_cls']), number_classes(data['minor_cls'])
+    data['major_cls'] = data['major_cls'].apply(lambda x: major_labels[x])
+    data['minor_cls'] = data['minor_cls'].apply(lambda x: minor_labels[x])
+    data['terms'] = (data['title'] + ' ' + data['summary']).apply(
+        functools.partial(preprocessed_terms, stem=stem, lemmatize=lemmatize, remove_conjunctions=remove_conjunctions,
+                          join=join))
+    return data, major_labels, minor_labels
+
+
+# this part is for turning the tests into vectors using 
+# TFIDF and W2V from the gensim model library
+
+def vectorize(data, w2v_options=None, tf_idf_options=None):
+    n = 100
+    w2v_options = w2v_options or dict(workers=8, iter=n)
+    tf_idf_options = tf_idf_options or dict()
+    vectorizer = TfidfVectorizer(**tf_idf_options)
+    tf_idf = vectorizer.fit_transform(data['terms'])
+# split the data with their spaces and turn it into a vector 
+
+    model = Word2Vec(data['terms'].apply(lambda x: x.split(' ')), **w2v_options)
+    w2v = np.array(data['terms'].apply( lambda x: sum(model.wv[y] if y in model.wv else 0 for y in x.split(' ')) / len(x.split(' '))).to_list())
+    return tf_idf, w2v
+
+
