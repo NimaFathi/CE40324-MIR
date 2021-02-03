@@ -1,5 +1,7 @@
 from os import listdir
+
 import numpy as np
+import json
 
 class PageRank:
     def __init__(self, alpha, max_iter):

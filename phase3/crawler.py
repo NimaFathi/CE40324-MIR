@@ -5,9 +5,11 @@ import time
 from bs4 import BeautifulSoup
 from selenium import webdriver
 
+papers_json = 'crawled_papers.json'
+
 
 class Crawler:
-    def __init__(self, limit=5000, wait=2):
+    def __init__(self, limit=5000, wait=10):
         self.driver = None
         self.reload_driver()
         self.crawl_limit = limit
@@ -33,7 +35,7 @@ class Crawler:
         self.driver = webdriver.Chrome(options=options)
 
     def crawl(self):
-        with open('papers.json', 'a') as file:
+        with open(papers_json, 'a') as file:
             file.write("[\n")
         index = 0
         add_to_queue = True
@@ -42,7 +44,7 @@ class Crawler:
             if paper_id in self.explored:
                 continue
 
-            paper = self.get_paper(paper_id)
+            paper = self.save_as_json(paper_id)
             if paper is None:
                 print('Reload driver ... Paper: {}/{} - Paper_id: {}'.format(index, self.crawl_limit, paper_id))
                 self.driver.quit()
@@ -57,7 +59,7 @@ class Crawler:
             if add_to_queue:
                 self.queue.extend(paper['references'])
                 add_to_queue = True if len(set(self.queue + list(self.explored))) <= self.crawl_limit else False
-        with open('papers.json', 'a') as file:
+        with open(papers_json, 'a') as file:
             file.write("]")  # create a file that contains multiple json objects
         self.driver.quit()
 
@@ -65,7 +67,7 @@ class Crawler:
         now = time.time()
         loaded = False
         while not loaded and time.time() - now < self.max_wait_time:
-            time.sleep(0.5)
+            time.sleep(1)
             loaded = '<div class="primary_paper">' in self.driver.page_source
         return loaded
 
@@ -77,17 +79,17 @@ class Crawler:
         else:
             return None
 
-    def get_paper(self, paper_id):
+    def save_as_json(self, paper_id):
         parsed_html = self.get_html(paper_id)
         if parsed_html is None:
             return None
-        paper_json = self.make_json_object(parsed_html, paper_id)
-        with open('papers.json', 'a') as file:
+        paper_json = self.extract_json_object(parsed_html, paper_id)
+        with open(papers_json, 'a') as file:
             json.dump(paper_json, file, indent=2)
             file.write(", ")
         return paper_json
 
-    def make_json_object(self, html, paper_id):
+    def extract_json_object(self, html, paper_id):
         title = html.head.find('title').text
         abstract = html.body.find('p', attrs={'class': None}).text
         date = html.body.find('span', attrs={'class': 'year'}).text
@@ -130,5 +132,5 @@ class Crawler:
 
 
 if __name__ == '__main__':
-    crawler = Crawler(limit=500)
+    crawler = Crawler()
     crawler.crawl()
