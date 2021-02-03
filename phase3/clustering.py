@@ -69,6 +69,21 @@ def GMM(data, vectors, n_components=None, **kwargs):
     return result 
 
 
+def plot2d(vectors, labels, true_labels=None, sizes=None, title=None):
+     n_components = 2
+     pca = PCA(n_components, random_state=random_state)
+     vector =  pca.fit_transform(vectors)
+
+    
+    
+
+
+    plt.scatter(vector[:, 0], vector[:, 1], c=labels, s=sizes)
+    if title:
+        plt.title(title)
+    plt.grid()
+    plt.show()
+
 
 def load_data(file='./files/hamshahri.json', stem=False, lemmatize=True, remove_conjunctions=False, join=' '):
     data = pd.read_json(file, encoding='utf-8')
