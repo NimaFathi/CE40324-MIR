@@ -1,18 +1,20 @@
-from sklearn.cluster import KMeans, AgglomerativeClustering
-from sklearn.mixture import GaussianMixture
-from sklearn.decomposition import PCA
-
 import matplotlib.pyplot as plt
 import pandas as pd
 import functools
+import itertools
+import numpy as np
+
 from sklearn.feature_extraction.text import TfidfVectorizer
 from gensim.models import Word2Vec
 from sklearn.metrics.cluster import contingency_matrix
 from sklearn.metrics import adjusted_rand_score, adjusted_mutual_info_score
-import numpy as np
-
 from sklearn.manifold import TSNE
+from tqdm import tqdm
 from collections import defaultdict
+from sklearn.cluster import KMeans, AgglomerativeClustering
+from sklearn.mixture import GaussianMixture
+from sklearn.decomposition import PCA
+
 
 from .preprocess import preprocessed_terms
 
@@ -85,6 +87,39 @@ def get_res(kmeans_res=None, gmm_res=None, hier_res=None, data=None):
             for metric, metric_value in alres.items():
                 res[metric].append(metric_value)
     return pd.DataFrame(res)
+
+
+def grid_search(algorithm, data, tfidf=None, w2v=None, fixed_params=None, variables=None):
+    result = defaultdict(list)
+
+    var_keys = list(variables.keys())
+    fixed_params = fixed_params or dict()
+    variables = variables or dict()
+
+    vectors = []
+    if tfidf is not None:
+        vectors.append(('tf-idf', tfidf))
+    if w2v is not None:
+        vectors.append(('w2v', w2v))
+
+    for values in tqdm(list(itertools.product(*[variables[key] for key in var_keys]))):
+        cur_vars = dict()
+        for i, key in enumerate(var_keys):
+            cur_vars[key] = values[i]
+
+        for vec_name, vec in vectors:
+            try:
+                labels, sizes = algorithm(data, vec, **fixed_params, **cur_vars)
+                eval_res = get_res(data['major_cls'], labels)
+                for met, met_val in eval_res.items():
+                    for var, var_val in cur_vars.items():
+                        result[var].append(var_val)
+                    result['metric'].append(met)
+                    result['score'].append(met_val)
+                    result['vectorization'].append(vec_name)
+            except Exception:
+                pass
+    return pd.DataFrame(result)
 
 
 def plot2d(vectors, labels, true_labels=None, sizes=None, title=None):
