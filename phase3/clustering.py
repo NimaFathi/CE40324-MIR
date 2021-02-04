@@ -76,17 +76,16 @@ def sk_tools(true_labels, predicted_labels):
 
 
 def get_res(kmeans_res=None, gmm_res=None, hier_res=None, data=None):
-    res = defaultdict(list)
+    ans = defaultdict(list)
     for name, value in [('kmeans', kmeans_res), ('gmm', gmm_res), ('hierarchical', hier_res)]:
-        if value is None:
-            continue
-        for vectorization in ['tf-idf', 'w2v']:
-            res['algorithm'].append(name.capitalize())
-            res['vectorization'].append(vectorization)
-            alres = sk_tools(data['major_cls'], value[vectorization])
-            for metric, metric_value in alres.items():
-                res[metric].append(metric_value)
-    return pd.DataFrame(res)
+        if value is not None:
+            for vectorization in ['tf-idf', 'w2v']:
+                ans['algorithm'].append(name.capitalize())
+                ans['vectorization'].append(vectorization)
+                alres = sk_tools(data['major_cls'], value[vectorization])
+                for metric, metric_value in alres.items():
+                    ans[metric].append(metric_value)
+    return pd.DataFrame(ans)
 
 
 def grid_search(algorithm, data, tfidf=None, w2v=None, fixed_params=None, variables=None):
@@ -132,16 +131,16 @@ def plot2d(vectors, labels, true_labels=None, sizes=None, title=None):
     if true_labels is not None:
         fig, axes = plt.subplots(1, 4, figsize=(26, 5))
         axes[0].scatter(vector[:, 0], vector[:, 1], c=labels, s=sizes)
-        axes[0].set_title('Prediction (PCA)')
+        axes[0].set_title('Pred PCA')
 
         axes[1].scatter(vector_tsne[:, 0], vector_tsne[:, 1], c=labels, s=sizes)
-        axes[1].set_title('Prediction (TSNE)')
+        axes[1].set_title('Pred TSNE')
 
         axes[2].scatter(vector[:, 0], vector[:, 1], c=true_labels)
-        axes[2].set_title('Ground truth (PCA)')
+        axes[2].set_title('True PCA')
 
         axes[3].scatter(vector_tsne[:, 0], vector_tsne[:, 1], c=true_labels)
-        axes[3].set_title('Ground truth (TSNE)')
+        axes[3].set_title('True TSNE')
         if title:
             fig.suptitle(title)
         return
