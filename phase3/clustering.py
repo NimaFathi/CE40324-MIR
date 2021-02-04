@@ -70,8 +70,8 @@ def sk_tools(true_labels, predicted_labels):
     matrix = contingency_matrix(true_labels, predicted_labels)
     return {
         'purity': np.sum(np.amax(matrix, axis=0)) / np.sum(matrix),
-        'adjusted_mutual_info': adjusted_mutual_info_score(true_labels, predicted_labels),
-        'adjusted_rand_index': adjusted_rand_score(true_labels, predicted_labels),
+        'mutual_info': adjusted_mutual_info_score(true_labels, predicted_labels),
+        'rand_index': adjusted_rand_score(true_labels, predicted_labels),
     }
 
 
@@ -152,7 +152,7 @@ def plot2d(vectors, labels, true_labels=None, sizes=None, title=None):
     plt.show()
 
 
-def load_data(file='./files/hamshahri.json', stem=False, lemmatize=True, remove_conjunctions=False, join=' '):
+def load_data(file='./phase3/hamshahri.json', stem=False, lemmatize=True, remove_conjunctions=False, join=' '):
     data = pd.read_json(file, encoding='utf-8')
     data['major_cls'], data['minor_cls'] = zip(*data['tags'].map(lambda x: tuple(x[0].split('>'))))
     major_labels, minor_labels = mapped_labels(data['major_cls']), mapped_labels(data['minor_cls'])
