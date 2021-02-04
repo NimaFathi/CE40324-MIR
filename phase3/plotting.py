@@ -1,9 +1,14 @@
+import seaborn as sns
+
 from yellowbrick.cluster import kelbow_visualizer, intercluster_distance
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 
 # from .preprocess import *
 from .clustering import return_clustered_csv, kmeans, load_data, vectorize, get_res, grid_search
+
+sns.set_theme()
+sns.set_style("dark")
 
 # loading data
 data, major_labels, minor_labels = load_data(stem=False, lemmatize=True, remove_conjunctions=True)
@@ -26,3 +31,4 @@ variables = dict(n_components=list(range(4,16)), max_iter=[100, 300, 600], n_ini
 fixed_vars = dict(random_state=666)
 res = grid_search(kmeans, data=data, tfidf=pca_tfidf, w2v=w2v, variables=variables,
                   fixed_params=fixed_vars)
+_ = sns.relplot(data=res, x='n_components', y='score', row='vectorization', col='max_iter', hue="metric", kind='line')
