@@ -3,7 +3,7 @@ from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 
 # from .preprocess import *
-from .clustering import return_clustered_csv, kmeans, load_data, vectorize, get_res
+from .clustering import return_clustered_csv, kmeans, load_data, vectorize, get_res, grid_search
 
 # loading data
 data, major_labels, minor_labels = load_data(stem=False, lemmatize=True, remove_conjunctions=True)
@@ -21,3 +21,8 @@ print("\nW2V:\n")
 _ = kelbow_visualizer(KMeans(random_state=666), w2v, k=(2, 16), metric='silhouette')
 _ = intercluster_distance(KMeans(n_clusters=5, random_state=666), w2v)
 
+# changing the number of clusters
+variables = dict(n_components=list(range(4,16)), max_iter=[100, 300, 600], n_init=[5,10,15,20])
+fixed_vars = dict(random_state=666)
+res = grid_search(kmeans, data=data, tfidf=pca_tfidf, w2v=w2v, variables=variables,
+                  fixed_params=fixed_vars)
