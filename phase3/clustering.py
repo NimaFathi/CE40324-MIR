@@ -7,9 +7,12 @@ import pandas as pd
 import functools
 from sklearn.feature_extraction.text import TfidfVectorizer
 from gensim.models import Word2Vec
+from sklearn.metrics.cluster import contingency_matrix
+from sklearn.metrics import adjusted_rand_score, adjusted_mutual_info_score
 import numpy as np
 
 from sklearn.manifold import TSNE
+from collections import defaultdict
 
 from .preprocess import preprocessed_terms
 
@@ -59,6 +62,29 @@ def return_clustered_csv(data, cluster_type, tfidf=None, w2v=None, options=None,
             f'outputs/{cluster_type.__name__}-w2v.csv')
 
     return result
+
+
+def sk_tools(true_labels, predicted_labels):
+    matrix = contingency_matrix(true_labels, predicted_labels)
+    return {
+        'purity': np.sum(np.amax(matrix, axis=0)) / np.sum(matrix),
+        'adjusted_mutual_info': adjusted_mutual_info_score(true_labels, predicted_labels),
+        'adjusted_rand_index': adjusted_rand_score(true_labels, predicted_labels),
+    }
+
+
+def get_res(kmeans_res=None, gmm_res=None, hier_res=None, data=None):
+    res = defaultdict(list)
+    for name, value in [('kmeans', kmeans_res), ('gmm', gmm_res), ('hierarchical', hier_res)]:
+        if value is None:
+            continue
+        for vectorization in ['tf-idf', 'w2v']:
+            res['algorithm'].append(name.capitalize())
+            res['vectorization'].append(vectorization)
+            alres = sk_tools(data['major_cls'], value[vectorization])
+            for metric, metric_value in alres.items():
+                res[metric].append(metric_value)
+    return pd.DataFrame(res)
 
 
 def plot2d(vectors, labels, true_labels=None, sizes=None, title=None):
