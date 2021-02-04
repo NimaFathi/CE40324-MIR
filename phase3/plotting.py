@@ -31,4 +31,12 @@ variables = dict(n_components=list(range(4,16)), max_iter=[100, 300, 600], n_ini
 fixed_vars = dict(random_state=666)
 res = grid_search(kmeans, data=data, tfidf=pca_tfidf, w2v=w2v, variables=variables,
                   fixed_params=fixed_vars)
-_ = sns.relplot(data=res, x='n_components', y='score', row='vectorization', col='max_iter', hue="metric", kind='line')
+_, _ = \
+    sns.relplot(data=res, x='n_components', y='score', row='vectorization', col='max_iter', hue="metric", kind='line'),\
+    sns.relplot(data=res[res['n_components'] == len(major_labels)], x='max_iter', y='score', col='n_init',
+                row='vectorization', hue="metric", kind='line')
+
+
+get_res(return_clustered_csv(data, kmeans, tfidf=pca_tfidf, w2v=w2v,
+                             options=dict(n_components=len(major_labels), max_iter=600, n_init=20, random_state=666),
+                             save=True), data=data)
