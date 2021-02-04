@@ -4,7 +4,7 @@ from yellowbrick.cluster import kelbow_visualizer, intercluster_distance
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 
-# from .preprocess import *
+from .preprocess import *
 from .clustering import return_clustered_csv, kmeans, load_data, vectorize, get_res, grid_search
 
 sns.set_theme()
