@@ -90,36 +90,34 @@ def get_res(kmeans_res=None, gmm_res=None, hier_res=None, data=None):
 
 
 def grid_search(algorithm, data, tfidf=None, w2v=None, fixed_params=None, variables=None):
-    result = defaultdict(list)
-
-    var_keys = list(variables.keys())
-    fixed_params = fixed_params or dict()
-    variables = variables or dict()
-
     vectors = []
     if tfidf is not None:
         vectors.append(('tf-idf', tfidf))
     if w2v is not None:
         vectors.append(('w2v', w2v))
 
-    for values in tqdm(list(itertools.product(*[variables[key] for key in var_keys]))):
+    variable_keys = list(variables.keys())
+    variables = variables or dict()
+    fixed_params = fixed_params or dict()
+    ans = defaultdict(list)
+    for values in tqdm(list(itertools.product(*[variables[key] for key in variable_keys]))):
         cur_vars = dict()
-        for i, key in enumerate(var_keys):
+        for i, key in enumerate(variable_keys):
             cur_vars[key] = values[i]
 
         for vec_name, vec in vectors:
             try:
                 labels, sizes = algorithm(data, vec, **fixed_params, **cur_vars)
-                eval_res = get_res(data['major_cls'], labels)
-                for met, met_val in eval_res.items():
+                result = get_res(data['major_cls'], labels)
+                for met, met_val in result.items():
                     for var, var_val in cur_vars.items():
-                        result[var].append(var_val)
-                    result['metric'].append(met)
-                    result['score'].append(met_val)
-                    result['vectorization'].append(vec_name)
+                        ans[var].append(var_val)
+                    ans['metric'].append(met)
+                    ans['score'].append(met_val)
+                    ans['vectorization'].append(vec_name)
             except Exception:
-                pass
-    return pd.DataFrame(result)
+                print("ERROR OCCURRED... ANS NOT UPDATED!\n")
+    return pd.DataFrame(ans)
 
 
 def plot2d(vectors, labels, true_labels=None, sizes=None, title=None):
