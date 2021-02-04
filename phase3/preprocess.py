@@ -1,8 +1,6 @@
 import string
 import hazm
 
-from sklearn.decomposition import PCA
-from .clustering import load_data, vectorize
 
 english_numerics = '0123456789'
 persian_numerics = '\u06F0\u06F1\u06F2\u06F3\u06F4\u06F5\u06F6\u06F7\u06F8\u06F9'
@@ -30,12 +28,3 @@ def preprocessed_terms(text, stem=False, lemmatize=False, remove_conjunctions=Fa
     if join is not None:
         return join.join(result)
     return result
-
-
-def pca(n_components, vectors, random_state=666):
-    return PCA(n_components, random_state=random_state).fit_transform(vectors)
-
-
-data, major_labels, minor_labels = load_data(stem=False, lemmatize=True, remove_conjunctions=True)
-tf_idf, w2v = vectorize(data, w2v_options=dict(size=64, iter=128, min_count=2))
-pca_tfidf = pca(64, tf_idf.toarray(), random_state=666)
