@@ -159,8 +159,8 @@ def plot2d(vectors, labels, true_labels=None, sizes=None, title=None):
         sizes = (sizes / sizes.max()) * 40 + 10
     if true_labels is not None:
         fig, axes = plt.subplots(1, 4, figsize=(26, 5))
-        axes[0].scatter(vector[:, 0], vector[:, 1], c=labels, s=sizes)
-        axes[0].set_title('Pred PCA')
+        # axes[0].scatter(vector[:, 0], vector[:, 1], c=labels, s=sizes)
+        # axes[0].set_title('Pred PCA')
         axes[1].scatter(vector[:, 0], vector[:, 1], c=true_labels)
         axes[1].set_title('True PCA')
 
