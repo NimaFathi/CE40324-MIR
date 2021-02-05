@@ -5,7 +5,7 @@ from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 
 # from .preprocess import *
-from phase3.clustering import return_clustered_csv, kmeans, load_data, vectorize, get_res, grid_search
+from phase3.clustering import return_clustered_csv, kmeans, load_data, vectorize, get_res, grid_search, GMM
 
 sns.set_theme()
 sns.set_style("dark")
@@ -26,3 +26,10 @@ print("\nW2V:\n")
 _ = kelbow_visualizer(KMeans(random_state=666), w2v, k=(2, 16), metric='silhouette')
 _ = intercluster_distance(KMeans(n_clusters=5, random_state=666), w2v)
 
+
+get_res(gmm_res=return_clustered_csv(
+    data,
+    GMM,
+    tfidf=pca_tfidf, w2v=w2v,
+    options=dict(n_components=len(major_labels), random_state=666),
+    save=True), data=data)
