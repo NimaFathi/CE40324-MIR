@@ -18,14 +18,14 @@ pca_tfidf = PCA(64, random_state=666).fit_transform(tfidf.toarray())
 # cluster diagrams
 get_res(return_clustered_csv(data, kmeans, pca_tfidf, w2v, options=dict(random_state=666), save=False), data=data)
 
-# # elbow charts and Inter-cluster Distance Maps
-# print("TF-IDF:\n")
-# _ = kelbow_visualizer(KMeans(random_state=666), pca_tfidf, k=(2, 16), metric='silhouette')
-# _ = intercluster_distance(KMeans(n_clusters=5, random_state=666), pca_tfidf)
-# print("\nW2V:\n")
-# _ = kelbow_visualizer(KMeans(random_state=666), w2v, k=(2, 16), metric='silhouette')
-# _ = intercluster_distance(KMeans(n_clusters=5, random_state=666), w2v)
-#
+# elbow charts and Inter-cluster Distance Maps
+print("TF-IDF:\n")
+_ = kelbow_visualizer(KMeans(random_state=666), pca_tfidf, k=(2, 16), metric='silhouette')
+_ = intercluster_distance(KMeans(n_clusters=5, random_state=666), pca_tfidf)
+print("\nW2V:\n")
+_ = kelbow_visualizer(KMeans(random_state=666), w2v, k=(2, 16), metric='silhouette')
+_ = intercluster_distance(KMeans(n_clusters=5, random_state=666), w2v)
+
 # # changing the number of clusters
 # variables = dict(n_components=list(range(4,16)), max_iter=[100, 300, 600], n_init=[5,10,15,20])
 # fixed_vars = dict(random_state=666)
