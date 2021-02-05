@@ -6,7 +6,14 @@ import json
 
 def page_rank(file_name, alpha: float = 0.1, convergence_limit: float = 1, top_count: int = 10):
     data = pd.read_json(file_name)
-    scores = get_eigen_vector(create_matrix(data, alpha), conv_limit)
+    matrix = create_matrix(data, alpha)
+    scores = np.random.rand(matrix.shape[0], 1)
+    scores = scores / np.linalg.norm(scores, 1)
+    dist = np.inf
+    while dist > convergence_limit:
+        past_v = scores
+        scores = matrix.T @ scores
+        dist = np.linalg.norm(scores - past_v)
     ranks = np.argsort(-scores.reshape(-1))
     data['page-rank'] = ranks
     return data.iloc[np.argsort(ranks)]
