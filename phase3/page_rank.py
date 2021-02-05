@@ -17,11 +17,11 @@ def page_rank(file_name, convergence_limit: float = 1):
             matrix[index, ref_cells] = (1 - alpha) / len(ref_cells)
     scores = np.random.rand(matrix.shape[0], 1)
     scores = scores / np.linalg.norm(scores, 1)
-    dist = np.inf
-    while dist > convergence_limit:
-        past_v = scores
+    distance = np.inf
+    while distance > convergence_limit:
+        prev_mat = scores
         scores = matrix.T @ scores
-        dist = np.linalg.norm(scores - past_v)
+        distance = np.linalg.norm(scores - prev_mat)
     ranks = np.argsort(-scores.reshape(-1))
     data['page-rank'] = ranks
     return data.iloc[np.argsort(ranks)]
