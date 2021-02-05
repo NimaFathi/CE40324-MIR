@@ -154,18 +154,15 @@ def plot2d(vectors, labels, true_labels=None, sizes=None, title=None):
     n_components = 2
     pca = PCA(n_components, random_state=666)
     vector = pca.fit_transform(vectors)
-
     if sizes is not None:
         sizes = sizes - sizes.min()
         sizes = (sizes / sizes.max()) * 40 + 10
     if true_labels is not None:
         fig, axes = plt.subplots(1, 4, figsize=(26, 5))
-        temp = axes[0]
-        temp.scatter(vector[:, 0], vector[:, 1], c=labels, s=temp['s'])
+        axes[0].scatter(vector[:, 0], vector[:, 1], c=labels, s=sizes)
         axes[0].set_title('Pred PCA')
-
-        axes[2].scatter(vector[:, 0], vector[:, 1], c=true_labels)
-        axes[2].set_title('True PCA')
+        axes[1].scatter(vector[:, 0], vector[:, 1], c=true_labels)
+        axes[1].set_title('True PCA')
 
         if title:
             fig.suptitle(title)
