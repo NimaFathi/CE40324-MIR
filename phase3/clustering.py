@@ -42,7 +42,6 @@ def GMM(data, vectors, n_components=None, **kwargs):
 
 
 # cluster type is one of the above three algorithm types
-# unindent?
 
 def return_clustered_csv(data, cluster_type, tfidf=None, w2v=None, options=None, save=False):
     options = options or dict()
@@ -59,9 +58,9 @@ def return_clustered_csv(data, cluster_type, tfidf=None, w2v=None, options=None,
 
     if save:
         result[['link', 'tf-idf']].rename(columns={'link': 'link', 'tf-idf': 'pred'}).to_csv(
-            f'outputs/{cluster_type.__name__}-tfidf.csv')
+            f'phase3/outputs/{cluster_type.__name__}-tfidf.csv')
         result[['link', 'w2v']].rename(columns={'link': 'link', 'w2v': 'pred'}).to_csv(
-            f'outputs/{cluster_type.__name__}-w2v.csv')
+            f'phase3/outputs/{cluster_type.__name__}-w2v.csv')
 
     return result
 
