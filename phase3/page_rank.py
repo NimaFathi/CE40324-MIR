@@ -4,7 +4,7 @@ import numpy as np
 import json
 
 
-def page_rank(file_name, alpha: float = 0.1, convergence_limit: float = 1, top_count: int = 10):
+def page_rank(file_name, convergence_limit: float = 1):
     data = pd.read_json(file_name)
     matrix = np.zeros((len(data), len(data)))
     alpha = 0.1
