@@ -65,6 +65,32 @@ def return_clustered_csv(data, cluster_type, tfidf=None, w2v=None, options=None,
     return result
 
 
+def return_clustered_csv_gmm(data, cluster_type, tfidf=None, w2v=None, options=None, options_tfidf=None,
+                             options_w2v=None, save=False):
+    options = options or dict()
+    options_tfidf = options_tfidf or dict()
+    options_w2v = options_w2v or dict()
+    result = pd.DataFrame({'link': data['link']})
+
+    if tfidf is not None:
+        args = {**options, **options_tfidf}
+        name = f'{cluster_type.__name__.capitalize()}' + ('' if not options else (
+                ' (' + ','.join(f'{i}={j}' for i, j in args.items()) + ')'))
+        result['tf-idf'], sizes = cluster_type(data, tfidf, **args)
+        plot2d(tfidf, result['tf-idf'], true_labels=data['major_cls'], sizes=sizes, title=f'{name} [tf-idf]')
+    if w2v is not None:
+        args = {**options, **options_w2v}
+        name = f'{cluster_type.__name__.capitalize()}' + ('' if not options else (
+                ' (' + ','.join(f'{i}={j}' for i, j in args.items()) + ')'))
+        result['w2v'], sizes = cluster_type(data, w2v, **args)
+        plot2d(w2v, result['w2v'], true_labels=data['major_cls'], sizes=sizes, title=f'{name} [w2v]')
+    if save:
+        result[['link', 'tf-idf']].rename(columns={'link': 'link', 'tf-idf': 'pred'}).to_csv(
+            f'phase3/outputs/{cluster_type.__name__.lower()}-tfidf.csv')
+        result[['link', 'w2v']].rename(columns={'link': 'link', 'w2v': 'pred'}).to_csv(
+            f'phase3/outputs/{cluster_type.__name__.lower()}-w2v.csv')
+    return result
+
 def sk_tools(true_labels, predicted_labels):
     matrix = contingency_matrix(true_labels, predicted_labels)
     return {
@@ -88,35 +114,40 @@ def get_res(kmeans_res=None, gmm_res=None, hier_res=None, data=None):
 
 
 def grid_search(algorithm, data, tfidf=None, w2v=None, fixed_params=None, variables=None):
+    result = defaultdict(list)
+
+    var_keys = list(variables.keys())
+    fixed_params = fixed_params or dict()
+    variables = variables or dict()
+
     vectors = []
     if tfidf is not None:
         vectors.append(('tf-idf', tfidf))
     if w2v is not None:
         vectors.append(('w2v', w2v))
 
-    variable_keys = list(variables.keys())
-    variables = variables or dict()
-    fixed_params = fixed_params or dict()
-    ans = defaultdict(list)
-    for values in tqdm(list(itertools.product(*[variables[key] for key in variable_keys]))):
+    for vals in tqdm(list(itertools.product(*[variables[key] for key in var_keys]))):
         cur_vars = dict()
-        for i, key in enumerate(variable_keys):
-            cur_vars[key] = values[i]
+        for i, key in enumerate(var_keys):
+            cur_vars[key] = vals[i]
 
         for vec_name, vec in vectors:
             try:
                 labels, sizes = algorithm(data, vec, **fixed_params, **cur_vars)
-                result = get_res(data['major_cls'], labels)
-                for met, met_val in result.items():
-                    for var, var_val in cur_vars.items():
-                        ans[var].append(var_val)
-                    ans['metric'].append(met)
-                    ans['score'].append(met_val)
-                    ans['vectorization'].append(vec_name)
+                eval_res = sk_tools(data['major_cls'], labels)
+                outer_func(result, vec_name, eval_res, cur_vars)
             except Exception:
-                print("ERROR OCCURRED... ANS NOT UPDATED!\n")
-    return pd.DataFrame(ans)
+                pass
+    return pd.DataFrame(result)
 
+
+def outer_func(result, vec_type, metrics, variables):
+    for met, met_val in metrics.items():
+        for var, var_val in variables.items():
+            result[var].append(var_val)
+        result['metric'].append(met)
+        result['score'].append(met_val)
+        result['vectorization'].append(vec_type)
 
 def plot2d(vectors, labels, true_labels=None, sizes=None, title=None):
     n_components = 2
@@ -132,14 +163,9 @@ def plot2d(vectors, labels, true_labels=None, sizes=None, title=None):
         axes[0].scatter(vector[:, 0], vector[:, 1], c=labels, s=sizes)
         axes[0].set_title('Pred PCA')
 
-        axes[1].scatter(vector_tsne[:, 0], vector_tsne[:, 1], c=labels, s=sizes)
-        axes[1].set_title('Pred TSNE')
-
         axes[2].scatter(vector[:, 0], vector[:, 1], c=true_labels)
         axes[2].set_title('True PCA')
 
-        axes[3].scatter(vector_tsne[:, 0], vector_tsne[:, 1], c=true_labels)
-        axes[3].set_title('True TSNE')
         if title:
             fig.suptitle(title)
         return

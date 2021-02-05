@@ -6,7 +6,7 @@ from sklearn.decomposition import PCA
 
 # from .preprocess import *
 from phase3.clustering import return_clustered_csv, kmeans, load_data, vectorize, get_res, grid_search, GMM, \
-    hierarchical
+    hierarchical, return_clustered_csv_gmm
 
 sns.set_theme()
 sns.set_style("dark")
@@ -39,4 +39,14 @@ get_res(hier_res=return_clustered_csv(
     hierarchical,
     tfidf=pca_tfidf, w2v=w2v,
     options=dict(n_components=len(major_labels)),
+    save=True), data=data)
+
+
+get_res(gmm_res=return_clustered_csv_gmm(
+    data,
+    GMM,
+    tfidf=pca_tfidf, w2v=w2v,
+    options=dict(n_components=len(major_labels), random_state=666),
+    options_tfidf=dict(covariance_type='full', max_iter=600),
+    options_w2v=dict(covariance_type='full', max_iter=600),
     save=True), data=data)
