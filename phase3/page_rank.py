@@ -6,7 +6,15 @@ import json
 
 def page_rank(file_name, alpha: float = 0.1, convergence_limit: float = 1, top_count: int = 10):
     data = pd.read_json(file_name)
-    matrix = create_matrix(data, alpha)
+    matrix = np.zeros((len(data), len(data)))
+    alpha = 0.1
+    for index in range(len(data)):
+        row = data.iloc[index]
+        refs = set(int(item) for item in row['references'])
+        ref_cells = data[data['id'].apply(lambda x: x in refs)].index
+        matrix[index] = (alpha if len(ref_cells) else 1) / (len(data) - len(ref_cells))
+        if len(ref_cells):
+            matrix[index, ref_cells] = (1 - alpha) / len(ref_cells)
     scores = np.random.rand(matrix.shape[0], 1)
     scores = scores / np.linalg.norm(scores, 1)
     dist = np.inf
