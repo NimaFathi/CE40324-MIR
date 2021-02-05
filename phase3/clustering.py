@@ -8,7 +8,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from gensim.models import Word2Vec
 from sklearn.metrics.cluster import contingency_matrix
 from sklearn.metrics import adjusted_rand_score, adjusted_mutual_info_score
-from sklearn.manifold import TSNE
 from tqdm import tqdm
 from collections import defaultdict
 from sklearn.cluster import KMeans, AgglomerativeClustering
